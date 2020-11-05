@@ -1,0 +1,161 @@
+.main-layout-nav-tabs ul {
+  background: #FF9800;
+}
+
+.main-layout-nav-tabs {
+  width: 100%;
+}
+
+  .main-layout-nav-tabs ul li a {
+    padding: 5px 8px;
+    color: #fff;
+    border-right: 1px solid #FF5722 !important;
+  }
+
+    .main-layout-nav-tabs ul li a.active, .main-layout-nav-tabs ul li a:hover {
+      background: #031f84 !important;
+      color: #fff !important;
+      border-bottom: none !important;
+      font-weight: normal;
+    }
+
+.right1 {
+  float: right
+}
+
+table.table.new-design-table thead tr th {
+  background: orange !important;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.btn-blue {
+  background-color: #263893 !important;
+  color: #fff !important;
+}
+
+.bg-green {
+  background: #16c016;
+}
+
+.bg-orange {
+  background: #FF9800;
+}
+
+.bg-blue {
+  background: #2196F3;
+}
+
+h3.report-title {
+  margin-bottom: 30px;
+  font-size: 20px;
+  color: #9E9E9E;
+}
+
+.width100 {
+  width: 100%
+}
+
+.padding0 {
+  padding: 0 !important;
+  border: none !Important
+}
+
+.main-layout-nav-tabs1 ul li {
+  margin-right: 10px;
+}
+
+  .main-layout-nav-tabs1 ul li a {
+    background: #f6f6f6;
+    border: none;
+    color: #000;
+    border-right: 0 !important;
+    padding: 5px 10px;
+  }
+
+.main-layout-nav-tabs1 ul {
+  background: #fff;
+  border: none;
+}
+
+  .main-layout-nav-tabs1 ul li a {
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+.custom-demo-nav a {
+  background: #f6f6f6;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+  .custom-demo-nav a.active {
+    background: orange !important;
+    color: #fff !important;
+  }
+
+.custom-demo-nav {
+  float: left;
+}
+
+.bg-new-grey {
+  background: #f6f6f6 !Important
+}
+
+.greensettings_button i {
+  background: #00FF00;
+  border-radius: 50%;
+  color: white;
+  padding: 7px 0px;
+  font-size: 18px;
+  width: 32px;
+  margin: 5px;
+  height: 32px;
+  text-align: center;
+}
+
+.settings_button i {
+  background: #007bff;
+  border-radius: 50%;
+  color: white;
+  padding: 7px 0px;
+  font-size: 18px;
+  width: 32px;
+  margin: 5px;
+  height: 32px;
+  text-align: center;
+}
+
+div#nav-tab {
+  border: none !important;
+}
+
+a.Download-list-button {
+  margin-top: 20px;
+  display: inline-block;
+  color: #686767 !important;
+  font-weight: 400;
+  font-style: italic;
+  background: #fff;
+  padding: 5px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.table-responsive {
+  HEIGHT: auto !important;
+}
+
+.bg-grey {
+  background: #f6f6f6 !important;
+}
+
+.new-design-table tr td {
+  background: #fff;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 1020px !Important;
+  }
+}

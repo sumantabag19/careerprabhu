@@ -1,0 +1,105 @@
+<div class="app">
+  <div class="layout">
+
+    <!-- Page Container START -->
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Coupon Master</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <label class="font-weight-semibold" for="language">Coupon Name</label>
+                  <input type="text" class="form-control" id="couponname" [(ngModel)]="coupon" [ngModelOptions]="{standalone: true}" placeholder="Enter Coupon Name">
+
+                </div>
+
+                <div class="form-group col-md-4">
+
+                  <label class="font-weight-semibold" for="phoneNumber">Expiry Date </label>
+                  <input class="form-control" placeholder="dd-mm-yyyy"
+                         name="d2" #c2="ngModel" [(ngModel)]="SelectedDate" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+
+                </div>
+                <div class="form-group col-md-4">
+                  <label class="font-weight-semibold" for="language">Discount Percentage</label>
+                  <input type="text" class="form-control" id="Percentage" [(ngModel)]="discount" [ngModelOptions]="{standalone: true}" placeholder="Discount Percentage">
+
+                </div>
+
+              </div>
+              
+
+              <form>
+                <div class="form-row main-custom">
+
+
+
+
+
+                </div>
+                <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+                <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="Reset();">
+
+
+              </form>
+
+              <div class="table-responsive m-t-25">
+                <table id="data-table" class="table">
+                  <thead>
+                    <tr>
+                      <th>SNo.</th>
+                      <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                      <th>Coupon Name</th>
+                      <th>Expiry Date</th>
+                      <th>Discount</th>
+
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                      <td>{{i+1}}</td>
+
+                      <td>{{data.couponname}}</td>
+                      <td>{{data.expirydate}}</td>
+                      <td>{{data.discount}}%</td>
+
+                      <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['couponid']);"></a></span></td>
+                      <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['couponid']);"></a></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Content Wrapper END -->
+
+    </div>
+    <!-- Page Container END -->
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+  });
+</script>
+

@@ -1,0 +1,141 @@
+<div class="app">
+  <div class="layout">
+
+    <!-- Page Container START -->
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Student Placement List</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+
+            <div class="card-body">
+
+              <form>
+                <div class="form-row main-custom">
+
+
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select State</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedstate" (change)="BindCity();BindTableData();" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select State--</option>
+                      <option *ngFor="let state of StateData" value={{state.stateid}}>
+                        {{state.state}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select City</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedcity" (change)="BindTableData();" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select City--</option>
+                      <option *ngFor="let city of CityData" value={{city.cityid}}>
+                        {{city.cityname}}
+                      </option>
+                    </select>
+                  </div>
+
+                </div>
+
+                <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="Reset();">
+              </form>
+              <div class="row">
+                <div class="form-group col-md-4">
+
+                </div>
+                <div class="form-group col-md-4">
+                </div>
+
+                <div class="form-group col-md-4 search-box pull-right">
+
+                  <input type="text" class="form-control" id="trt" [(ngModel)]="search" [ngModelOptions]="{standalone: true}" placeholder="Search">
+
+                </div>
+              </div>
+
+            </div>
+            <div class="card-body">
+              <form>
+
+
+
+            
+                <div class="table-responsive m-t-25">
+                  <table id="data-table" class="table">
+                    <thead>
+                      <tr>
+                        <th>Sr.No</th>
+                        <th>Student Name</th>
+                        <th>Mobile No</th>
+                        <th>Father Name</th>
+                        <th>Drop</th>
+                        <th>University</th>
+                        <th>College</th>
+                        <th>Course</th>
+                        <th>
+                          Specialization
+                        </th>
+
+                        <th>State</th>
+                        <th>City</th>
+
+                        <!--<th>Edit</th>
+          <th>Delete</th>-->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of GetSaveData | searchfilter:search;let i = index" style="align-content:center">
+                        <td>{{i+1}}</td>
+                        <td>{{data.studentname}}</td>
+                        <td>{{data.mobileno}}</td>
+
+                        <td>{{data.fathername}}</td>
+                        <td>{{data.isdrop}}</td>
+                        <td>{{data.university}}</td>
+
+                        <td>{{data.college}}</td>
+                        <td>{{data.course}}</td>
+
+                        <td>{{data.specialization}}</td>
+                        <td>{{data.state}}</td>
+                        <td>{{data.city}}</td>
+
+
+                        <!--<td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditPlacement(i,data['interviewid']);"></a></span></td>
+          <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeletePlacement(i,data['interviewid']);"></a></span></td>-->
+                      </tr>
+                    </tbody>
+
+                  </table>
+                </div>
+
+
+
+
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Content Wrapper END -->
+    <!-- Footer START -->
+    <!-- Footer END -->
+
+  </div>
+
+
+</div>
+

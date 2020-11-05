@@ -1,0 +1,365 @@
+<div class="app">
+  <div class="layout">
+
+    <!-- Page Container START -->
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Life Coaches</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+
+              <form>
+                <div class="form-row main-custom">
+
+
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select Coach Type</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedtopic" name="cls" (change)="BindCoach();" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select Coach Type--</option>
+                      <option *ngFor="let topic of TopicData" value={{topic.topicid}}>
+                        {{topic.topiname}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select Coach</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedcoach" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select Coach--</option>
+                      <option *ngFor="let coach of CoachData" value={{coach.interviewid}}>
+                        {{coach.coachname}}
+                      </option>
+                    </select>
+                  </div>
+
+                </div>
+
+
+              </form>
+
+            </div>
+
+
+
+
+
+
+            <!-- Interviews starts -->
+
+
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Interviews
+                    </button>
+                  </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+
+
+
+                    <form>
+                      <div class="form-row">
+                        <div class="form-group col-md-4">
+                          <label class="font-weight-semibold" for="phoneNumber">Title</label>
+                          <input type="text" class="form-control" id="intrest" [(ngModel)]="inttitle" [ngModelOptions]="{standalone: true}" placeholder="Enter Title">
+                        </div>
+                        <!--<div class="form-group col-md-4">
+                          <label class="font-weight-semibold" for="dob">Link</label>
+                          <input type="text" class="form-control" id="videolnk" [(ngModel)]="videolink" [ngModelOptions]="{standalone: true}" placeholder="Enter Link">
+                        </div>-->
+                        <div class="form-group col-md-4">
+                          <label class="font-weight-semibold" for="phoneNumber">Choose File</label>
+
+                          <input #intfile type="File" class="form-control" id="pdf" [(ngModel)]="Selectedintfile" name="pdf" placeholder="Upload Pdf" (change)="GetIntDetail($event)">
+                        </div>
+                        <!--<div class="form-group col-md-4">
+                          <label class="font-weight-semibold" for="language">Upload Image</label>
+
+
+                          <input #inputFile type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage" name="img" placeholder="Upload Image" (change)="GetImageDetail($event)">
+
+                        </div>-->
+                        <div class="form-group col-md-12">
+                          <label class="font-weight-semibold" for="phoneNumber">Subtitle</label>
+                          <input type="text" class="form-control" id="intrest" [(ngModel)]="intsubtitle" [ngModelOptions]="{standalone: true}" placeholder="Enter Description">
+                        </div>
+
+
+
+
+                      </div>
+                      <input type="button" class="btn btn-warning m-r-5" value="{{ButtonInterviewsText}}" style="cursor:pointer" (click)="InterviewSave();">
+                      <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearInterviews();">
+
+
+
+                    </form>
+                    <div class="table-responsive m-t-25">
+                      <table id="data-table" class="table">
+                        <thead>
+                          <tr>
+                            <th>Sr.No</th>
+                            <th>Coach Type</th>
+                            <th>Coach Name</th>
+
+                            <th>Title</th>
+                            <th>Subtitle</th>
+
+                            <th>File</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                            <td>{{i+1}}</td>
+                            <td>{{data.coachtype}}</td>
+                            <td>{{data.coachname}}</td>
+
+
+                            <td>{{data.title}}</td>
+                            <td>{{data.subtitle}}</td>
+
+                            <td>
+
+                              <a *ngIf="data.docname == ''">N/A</a>
+                              <a *ngIf="data.docname != ''" href="{{data.docname}}" download>Download</a>
+                              <!--<a *ngIf="checklink == true">N/A</a>
+                              <a *ngIf="checklink == false" href="{{data.Image}}" download>Download</a>-->
+
+                            </td>
+
+                            <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditInterview(i,data['liveinterviewid']);"></a></span></td>
+                            <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteInterview(i,data['liveinterviewid']);"></a></span></td>
+                          </tr>
+
+
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+              </div>
+
+            </div>
+
+
+
+            <!-- Interviews ends -->
+            <!-- life journey -->
+
+
+            <div class="accordion" id="accordionExample1">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
+                      Life Journey
+                    </button>
+                  </h2>
+                </div>
+
+                <div id="collapseOne1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <form>
+                      <div class="form-row">
+                        <div class="form-group col-md-4">
+                          <label class="font-weight-semibold" for="phoneNumber">Title</label>
+                          <input type="text" class="form-control" id="intrest" [(ngModel)]="journeytitle" [ngModelOptions]="{standalone: true}" placeholder="Enter Title">
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label class="font-weight-semibold" for="phoneNumber">Choose File</label>
+
+                          <input #journeyfile type="File" class="form-control" id="pdf" [(ngModel)]="Selectedjourneyfile" name="pdf" placeholder="Upload Pdf" (change)="GetjourneyDetail($event)">
+                        </div>
+                        <div class="form-group col-md-12">
+                          <label class="font-weight-semibold" for="phoneNumber">Subtitle</label>
+                          <input type="text" class="form-control" id="intrest" [(ngModel)]="jousubtitle" [ngModelOptions]="{standalone: true}" placeholder="Enter Description">
+                        </div>
+
+                      </div>
+                      <input type="button" class="btn btn-warning m-r-5" value="{{ButtonjourneyText}}" style="cursor:pointer" (click)="journeySave();">
+                      <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearJOurney();">
+
+                    </form>
+                    <div class="table-responsive m-t-25">
+                      <table id="data-table" class="table">
+                        <thead>
+                          <tr>
+                            <th>Sr.No</th>
+                            <th>Coach Type</th>
+                            <th>Coach Name</th>
+
+                            <th>Title</th>
+                            <th>Subtitle</th>
+
+                            <th>File</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of GetSaveJourneyData;let i = index" style="align-content:center">
+                            <td>{{i+1}}</td>
+                            <td>{{data.coachtype}}</td>
+                            <td>{{data.coachname}}</td>
+
+
+                            <td>{{data.title}}</td>
+                            <td>{{data.subtitle}}</td>
+
+                            <td>
+                              <a *ngIf="data.docname == ''">N/A</a>
+                              <a *ngIf="data.docname != ''" href="{{data.docname}}" download>Download</a>
+
+                            </td>
+
+                            <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditJourney(i,data['journeyid']);"></a></span></td>
+                            <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteJourney(i,data['journeyid']);"></a></span></td>
+                          </tr>
+
+
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+              </div>
+
+            </div>
+
+
+            <!--  life journey-->
+            <!-- Articles -->
+
+
+
+            <div class="accordion" id="accordionExample2">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
+                      Articles
+                    </button>
+                  </h2>
+                </div>
+
+                <div id="collapseOne2" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <form>
+                      <div class="form-row">
+                        <div class="form-group col-md-4">
+                          <label class="font-weight-semibold" for="phoneNumber">Title</label>
+                          <input type="text" class="form-control" id="intrest" [(ngModel)]="articletitle" [ngModelOptions]="{standalone: true}" placeholder="Enter Title">
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label class="font-weight-semibold" for="phoneNumber">Choose File</label>
+
+                          <input #articlefile type="File" class="form-control" id="pdf" [(ngModel)]="Selectedarticlefile" name="pdf" placeholder="Upload Pdf" (change)="GetarticleDetail($event)">
+                        </div>
+                        <div class="form-group col-md-12">
+                          <label class="font-weight-semibold" for="phoneNumber">Subtitle</label>
+                          <input type="text" class="form-control" id="intrest" [(ngModel)]="articlesubtitle" [ngModelOptions]="{standalone: true}" placeholder="Enter Description">
+                        </div>
+
+
+
+
+                      </div>
+                      <input type="button" class="btn btn-warning m-r-5" value="{{ButtonarticleText}}" style="cursor:pointer" (click)="articleSave();">
+                      <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearArticle();">
+
+
+
+                    </form>
+                    <div class="table-responsive m-t-25">
+                      <table id="data-table" class="table">
+                        <thead>
+                          <tr>
+                            <th>Sr.No</th>
+                            <th>Coach Type</th>
+                            <th>Coach Name</th>
+
+                            <th>Title</th>
+                            <th>Subtitle</th>
+
+                            <th>File</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of GetSaveArticleData;let i = index" style="align-content:center">
+                            <td>{{i+1}}</td>
+                            <td>{{data.coachtype}}</td>
+                            <td>{{data.coachname}}</td>
+
+
+                            <td>{{data.title}}</td>
+                            <td>{{data.subtitle}}</td>
+
+                            <td>
+                              <a *ngIf="data.docname == ''">N/A</a>
+                              <a *ngIf="data.docname != ''" href="{{data.docname}}" download>Download</a>
+                            </td>
+
+                            <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditArticle(i,data['articleid']);"></a></span></td>
+                            <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteArticle(i,data['articleid']);"></a></span></td>
+                          </tr>
+
+
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+              </div>
+
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Content Wrapper END -->
+
+
+  </div>
+
+
+
+
+</div>
+

@@ -1,0 +1,153 @@
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: auto;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.logo-login img.img-fluid, .logo-login img {
+  max-width: 200px;
+  margin-bottom: 30px;
+}
+
+textarea.main-area {
+  padding: .55rem 1rem;
+  height: auto;
+  color: #53535f;
+  border: 1px solid #edf2f9;
+  font-size: .875rem;
+  line-height: 1.5;
+  width: 100%;
+}
+
+ul.list_brdr {
+  width: 330px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  padding: 5px;
+  height: auto;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.checkAll {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #c3c3c3;
+  padding: 0px 3px;
+}
+
+  .checkAll li {
+    list-style: none;
+  }
+
+.all_lists {
+  float: left;
+  width: 100%;
+  padding: 10px 3px;
+}
+
+span.checkAll input#select-all {
+  width: 5%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+span.checkAll input#select-all1 {
+  width: 5%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+span.checkAll input#select-all2 {
+  width: 5%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+span.checkAll input#select-all3 {
+  width: 5%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.all_lists li input {
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+span.all_lists li {
+  width: 100%;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+  span.all_lists li input.city_check {
+    max-width: 5%;
+    vertical-align: middle;
+    height: 22px;
+  }
+
+  span.all_lists li input.city_checks {
+    max-width: 5%;
+    vertical-align: middle;
+    height: 22px;
+  }
+
+  span.all_lists li input.city_checks1 {
+    max-width: 5%;
+    vertical-align: middle;
+    height: 22px;
+  }
+
+  span.all_lists li input.city_checks2 {
+    max-width: 5%;
+    vertical-align: middle;
+    height: 22px;
+  }
+
+  span.all_lists li input.city_check {
+    max-width: 5%;
+    vertical-align: middle;
+    height: 22px;
+  }
+
+span.checkAll input#select-all3 {
+  width: 5%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px
+}
+
+.font-weight-semibold {
+  font-weight: 500 !important
+}

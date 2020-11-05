@@ -1,0 +1,55 @@
+<div class="page-container">
+  <div class="main-content">
+    <div class="page-header no-gutters has-tab">
+      <h2 class="font-weight-normal">Country Master</h2>
+    </div>
+
+
+    <div class="card">
+
+     
+
+
+
+
+      <div class="card-body">
+      
+
+        <!--Dynamic table bind-->
+        <div class="m-t-25">
+          <div class="table-responsive">
+            <table id="data-table" class="table">
+              <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <th>country</th>
+                  <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+
+                
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                  <td>{{i+1}}</td>
+                  <td>{{data.countryname}}</td>
+
+                  <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                  <td><span>
+  <input type="button" class="btn btn-warning m-r-5" value="{{data.status}}" style="cursor:pointer" (click)="onSubmit(i,data['countryid']);">
+</span></td>
+                  <!--<td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['cityid']);"></a></span></td>-->
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+

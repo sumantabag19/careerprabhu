@@ -1,0 +1,96 @@
+<div class="app">
+  <div class="layout">
+
+
+
+    <!-- Page Container START -->
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Professional Help Master</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+
+              <form>
+                <div class="form-row">
+
+
+
+
+                  <div class="form-group col-md-12">
+                    <label class="font-weight-semibold" for="dob">Testimonial</label>
+                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="testimonial" height="400px" name="first"></angular-editor>
+                    <!--<input type="text" class="form-control" id="Testimonial" [(ngModel)]="testimonial" [ngModelOptions]="{standalone: true}" placeholder="Enter testimonial">-->
+
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label class="font-weight-semibold" for="language">Upload Image</label>
+
+                    <input #inputfile type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage" name="img" placeholder="Upload Image" (change)="GetImageDetail($event)">
+                  </div>
+
+
+
+
+                </div>
+                <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSave();">
+                <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+
+              </form>
+              <div class="m-t-25">
+                <div class="table-responsive">
+                  <table id="data-table" class="table">
+                    <thead>
+                      <tr>
+                        <th>SNo.</th>
+                        <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+
+
+                        <th>Testimonial</th>
+                        <th>Image</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                        <td>{{i+1}}</td>
+                        <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+
+                        <td>{{data.Testimonial}}</td>
+
+
+
+
+                        <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['prohelpid']);"></a></span></td>
+                        <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['prohelpid']);"></a></span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Content Wrapper END -->
+
+
+
+
+    </div>
+  </div>
+
+
+

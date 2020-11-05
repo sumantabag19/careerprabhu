@@ -1,0 +1,158 @@
+
+  <div class="page-container">
+    <div class="main-content">
+      <div class="page-header no-gutters has-tab">
+        <h2 class="font-weight-normal">Preparatory Material</h2>
+      </div>
+     
+
+        <div class="card">
+
+          <div class="card-body">
+
+            <form>
+
+              <div class="form-row main-custom">
+                <!--<div class="form-group col-md-4">
+    <div class="bg-color">
+      <label class="font-weight-semibold">Select Class</label>
+      <ul class="list_brdr">
+        <span class="checkAll">
+          <li>
+            <input type="checkbox"
+                   name="ClassSelected"
+                   id="select-all3"
+                   [(ngModel)]="AllClass"
+                   (change)="SelectAllClass();"
+                   [ngModelOptions]="{standalone: true}">&nbsp;Select All Class
+          </li>
+        </span>
+        <span class="all_lists">
+          <li *ngFor="let class of ClassData">
+            <input type="checkbox"
+                   class="city_check"
+                   name="ClassSelected"
+                   value="{{ class.classid }}"
+                   [(ngModel)]="class.selected"
+                   (change)="getSelectedClass();"
+                   [ngModelOptions]="{standalone: true}">{{ class.classname }}
+          </li>
+        </span>
+      </ul>
+    </div>
+  </div>-->
+                <!--<div class="form-group col-md-4">
+
+    <div class="bg-color">
+      <label class="font-weight-semibold">Select Stream</label>
+
+      <ul class="list_brdr">
+        <span class="checkAll">
+          <li>
+            <input type="checkbox"
+                   name="StreamSelected"
+                   id="select-all3"
+                   [(ngModel)]="AllStream"
+                   (change)="SelectAllStream();"
+                   [ngModelOptions]="{standalone: true}">&nbsp;Select All Stream
+          </li>
+        </span>
+        <span class="all_lists">
+          <li *ngFor="let stream of StreamData">
+            <input type="checkbox"
+                   class="city_check"
+                   name="StreamSelected"
+                   value="{{ stream.streamid }}"
+                   [(ngModel)]="stream.selected"
+                   (change)="getSelectedStream();"
+                   [ngModelOptions]="{standalone: true}">{{ stream.streamname }}
+          </li>
+        </span>
+      </ul>
+
+    </div>
+  </div>-->
+                <div class="form-group col-md-4">
+                  <label class="font-weight-semibold" for="language">Define Category</label>
+                  <input type="text" class="form-control" id="Topic" [(ngModel)]="Topic" [ngModelOptions]="{standalone: true}" placeholder="Enter category name">
+
+                </div>
+
+                <div class="form-group col-md-4" style="display:none;">
+                  <label class="font-weight-semibold" for="phoneNumber">Choose Logo</label>
+                  <input #prevyearfile type="File" class="form-control" id="pdf" [(ngModel)]="Selectedfile" name="pdf" placeholder="Upload Pdf" (change)="GetPdfDetail($event)">
+                </div>
+
+
+
+                <div class="form-group col-md-4">
+                  <label class="font-weight-semibold" for="intar">Select Logo</label>
+                  <select id="Class" class="form-control" [(ngModel)]="selectedlogo" name="cls" [ngModelOptions]="{standalone: true}">
+                    <option value="" selected>--Select Logo--</option>
+                    <option *ngFor="let logo of LogoData" value={{logo.logoid}}>
+                      {{logo.logoname}}
+                    </option>
+                  </select>
+                </div>
+
+              </div>
+            </form>
+          </div>
+
+
+
+
+          <div class="card-body">
+            <form>
+             
+
+              <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+              <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+            </form><br>
+
+            <!--Dynamic table bind-->
+            <div class="m-t-25">
+              <table id="data-table" class="table">
+                <thead>
+                  <tr>
+                    <th>SNo.</th>
+                    <!--<th>Class</th>
+  <th>Stream</th>-->
+                    <th>Category Name</th>
+                    <!--<th>Logo</th>-->
+                    <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                    <th>Logo</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                    <td>{{i+1}}</td>
+                    <!--<td>{{data.Class}}</td>
+  <td>{{data.Stream}}</td>-->
+                    <td>{{data.Topic}}</td>
+
+                    <td>
+
+
+    <a *ngIf="data.logo1 != ''" href="{{data.logo1}}" download>Download</a>
+
+
+  </td>
+                    <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+
+                    <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['Id']);"></a></span></td>
+                    <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['Id']);"></a></span></td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      </div>
+ 

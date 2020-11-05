@@ -1,0 +1,66 @@
+
+  <div class="page-container">
+    <div class="main-content">
+      <div class="page-header no-gutters has-tab">
+        <h2 class="font-weight-normal">Interest Area</h2>
+      </div>
+
+
+      <div class="card">
+     
+        <div class="card-body">
+
+          <form>
+
+            <div class="form-row main-custom">
+
+              <div class="form-group col-md-4">
+                <label class="font-weight-semibold" for="language">Define Interest Area</label>
+                <input type="text" class="form-control" id="intarea" [(ngModel)]="repositoryname" [ngModelOptions]="{standalone: true}" placeholder="Enter Intrest Area">
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+
+
+        <div class="card-body">
+          <form>
+
+
+            <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+            <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+          </form><br>
+
+          <!--Dynamic table bind-->
+          <div class="m-t-25">
+            <table id="data-table" class="table">
+              <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <!--<th id="repository" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                  <th>Interest Area</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                  <td>{{i+1}}</td>
+                  <td>{{data.ReporitoryName}}</td>
+                  <!--<td id="repository" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                  <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditRepositoryData(i,data['ID']);"></a></span></td>
+                  <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['ID']);"></a></span></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>

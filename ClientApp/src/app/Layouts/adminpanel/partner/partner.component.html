@@ -1,0 +1,198 @@
+<div class="app">
+  <div class="layout">
+
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Partner Registration</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+              <div class="row">
+
+              </div>
+              <form>
+                <div class="form-row main-custom">
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Partner Name</label>
+                    <input type="text" class="form-control" id="par" [(ngModel)]="partnername" [ngModelOptions]="{standalone: true}" placeholder="Enter Partner Name">
+
+                  </div>
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Mobile No</label>
+                    <input type="text" class="form-control" id="mob" [(ngModel)]="mobile" [ngModelOptions]="{standalone: true}" placeholder="Enter Mobile No" maxlength="10">
+
+                  </div>
+                  <!--<div class="form-group col-md-4">
+
+    <label class="font-weight-semibold" for="locat">Coupon Name</label>
+    <input type="text" class="form-control" id="cou" [(ngModel)]="couponname" [ngModelOptions]="{standalone: true}" placeholder="Enter Coupon Name">
+
+  </div>-->
+
+                  
+                    <div class="form-group col-md-4">
+                      <div class="bg-color">
+                        <label class="font-weight-semibold">Select Coupon</label>
+                        <ul class="list_brdr">
+                          <span class="checkAll">
+                            <li>
+                              <input type="checkbox"
+                                     name="CouponSelected"
+                                     id="select-all3"
+                                     [(ngModel)]="AllCoupon"
+                                     (change)="SelectAllCoupon();"
+                                     [ngModelOptions]="{standalone: true}">&nbsp;Select All Coupons
+                            </li>
+                          </span>
+                          <span class="all_lists">
+                            <li *ngFor="let Coupon of CouponData">
+                              <input type="checkbox"
+                                     class="city_check"
+                                     name="CouponSelected"
+                                     value="{{ Coupon.Couponid }}"
+                                     [(ngModel)]="Coupon.selected"
+                                     (change)="getSelectedCoupon();"
+                                     [ngModelOptions]="{standalone: true}">{{ Coupon.Couponname }}
+                            </li>
+                          </span>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label class="font-weight-semibold" for="intar">Select State</label>
+                      <select id="Class" class="form-control" [(ngModel)]="selectedstate" (change)="BindCity();" name="cls" [ngModelOptions]="{standalone: true}">
+                        <option value="0" selected>--Select State--</option>
+                        <option *ngFor="let state of StateData" value={{state.stateid}}>
+                          {{state.state}}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label class="font-weight-semibold" for="intar">Select City</label>
+                      <select id="Class" class="form-control" [(ngModel)]="selectedcity"  name="cls" [ngModelOptions]="{standalone: true}">
+                        <option value="0" selected>--Select City--</option>
+                        <option *ngFor="let city of CityData" value={{city.cityid}}>
+                          {{city.cityname}}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                      <label class="font-weight-semibold" for="locat">District</label>
+                      <input type="text" class="form-control" id="dist" [(ngModel)]="district" [ngModelOptions]="{standalone: true}" placeholder="Enter District">
+
+                    </div>
+                    <div class="form-group col-md-4">
+
+                      <label class="font-weight-semibold" for="locat">Email</label>
+                      <input type="text" class="form-control" id="mail" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="Enter Email">
+
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                      <label class="font-weight-semibold" for="locat">WhatsApp Number</label>
+                      <input type="text" class="form-control" id="wno" [(ngModel)]="whatsappno" [ngModelOptions]="{standalone: true}" placeholder="Enter WhatsApp Number" maxlength="10">
+
+                    </div>
+                    <div class="form-group col-md-4">
+
+                      <label class="font-weight-semibold" for="locat">Coupon Percentage</label>
+                      <input type="text" class="form-control" id="dis" [(ngModel)]="discount" [ngModelOptions]="{standalone: true}" placeholder="Enter Coupon Percentage">
+
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label class="font-weight-semibold" for="catagory">Categories</label>
+                      <select id="Catagory" class="form-control" [(ngModel)]="selectproduct" name="topic" [ngModelOptions]="{standalone: true}">
+                        <option value="0" selected>--Select Category--</option>
+                        <option *ngFor="let product of Products" value={{product.productid}}>
+                          {{product.productname}}
+                        </option>
+                      </select>
+                    </div>
+
+
+                  </div>
+                  <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+                  <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+
+
+
+
+
+
+</form>
+              <div class="table-responsive m-t-25">
+                <table id="data-table" class="table">
+                  <thead>
+                    <tr>
+                      <th>SNo.</th>
+
+                      <th>Partner Name</th>
+                      <th>Mobile No</th>
+                      <th>Coupon Name</th>
+                      <th>State</th>
+                      <th>City</th>
+                      <th>District</th>
+                      <th>Email</th>
+                      <th>Password</th>
+                      <th>WhatsApp Number</th>
+                      <th>Coupon Percentage</th>
+                      <th>Categories</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                      <td>{{i+1}}</td>
+                      <td>{{data.partnername}}</td>
+                      <td>{{data.mobileno}}</td>
+                      <td>{{data.Couponname}}</td>
+                      <td>{{data.state}}</td>
+
+                      <td>{{data.city}}</td>
+                      <td>{{data.district}}</td>
+                      <td>{{data.email}}</td>
+                      <td>{{data.pwd}}</td>
+
+                      <td>{{data.whatsappno}}</td>
+                      <td>{{data.discount}}%</td>
+                      <td>{{data.product}}</td>
+                      <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['regid']);"></a></span></td>
+                      <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['regid']);"></a></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+  </div>
+</div>

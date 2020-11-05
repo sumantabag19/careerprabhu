@@ -1,0 +1,900 @@
+<div class="app">
+  <div class="layout">
+
+
+    <!-- Page Container START -->
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Upload Preparatory Material</h2>
+
+        </div>
+        <div class="container-fluid">
+
+          <div class="card">
+            <div class="card-body">
+
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="phoneNumber">Select Preparatory Category</label>
+                    <select id="class" class="form-control" [(ngModel)]="selectedprepcatagory" (change)="Bindtitle();" [ngModelOptions]="{standalone: true}">
+
+                      <option value="0" selected>--Select Preparatory Category--</option>
+                      <option *ngFor="let prep of PrepData" value="{{prep.prepid}}">
+                        {{prep.categoryname}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">Select Preparatory Title</label>
+                    <select id="class" class="form-control" [(ngModel)]="selectedtitle" (change)="BindAllTable();" [ngModelOptions]="{standalone: true}">
+
+                      <option value="0" selected>--Select Preparatory Title--</option>
+                      <option *ngFor="let title of TitleData" value="{{title.prepnameid}}">
+                        {{title.prepname}}
+                      </option>
+                    </select>
+                  </div>
+
+                </div>
+
+              </form>
+
+              <div class="accordion" id="accordionExample">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Previous Year Paper <span>{{prevyearrecord}}</span>
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+
+
+
+                      <form>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Define Name</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="pname" [ngModelOptions]="{standalone: true}" placeholder="Enter Name">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Url</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="purl" [ngModelOptions]="{standalone: true}" placeholder="Enter Url">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Display Text</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="ptext" [ngModelOptions]="{standalone: true}" placeholder="Enter Text">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Choose File</label>
+
+                            <!--<ejs-uploader id='fileupload' [autoUpload]='false' multiple='false' (selected)="GetPdfDetail($event)"></ejs-uploader>-->
+
+
+                            <input #prevyearfile type="File" class="form-control" id="pdf" [(ngModel)]="Selectedfile" name="pdf" placeholder="Upload Pdf" (change)="GetPdfDetail($event)">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Choose Image</label>
+                            <!--<ejs-uploader id='Image' [autoUpload]='false' multiple='false' (selected)="GetImageDetail($event)"></ejs-uploader>-->
+
+                            <input #prevyearimage type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage" name="img" placeholder="Upload Image" (change)="GetImageDetail($event)">
+                          </div>
+
+                        </div>
+                        <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="PreviousYearSave();">
+                        <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearPreviousYear();">
+
+                        <div class="row">
+                          <div class="form-group col-md-4">
+
+                          </div>
+                          <div class="form-group col-md-4">
+                          </div>
+
+                          <div class="form-group col-md-4 search-box pull-right">
+
+                            <input type="text" class="form-control" id="trt" [(ngModel)]="search" [ngModelOptions]="{standalone: true}" placeholder="Search">
+
+                          </div>
+                        </div>
+
+                      </form>
+                      <div class="table-responsive m-t-25">
+                        <table id="data-table" class="table">
+                          <thead>
+                            <tr>
+                              <th>Sr.No</th>
+                              <th>Title</th>
+                              <th>Category</th>
+
+                              <th>Name</th>
+                              <th>Text</th>
+                              <th>Url</th>
+                              <th>File</th>
+                              <th>Image</th>
+                              <th>Edit</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let data of GetSaveData | searchfilter:search;let i = index" style="align-content:center">
+                              <td>{{i+1}}</td>
+                              <td>{{data.prepname}}</td>
+                              <td>{{data.categoryname}}</td>
+
+                              <td>{{data.pname}}</td>
+                              <td>{{data.ptext}}</td>
+                              <td>{{data.purl}}</td>
+                              <!--<td>
+    <button (click)="handleButtonClick(data.purl)" data-toggle="modal" data-target="#myModal">Play</button>
+  </td>-->
+                              <td>
+                                <a *ngIf="data.docname == ''">N/A</a>
+                                <a *ngIf="data.docname != ''" href="{{data.docname}}" download>Download</a>
+                              </td>
+                              <td>
+                                <a *ngIf="data.imagename == ''">N/A</a>
+                                <a *ngIf="data.imagename != ''" href="{{data.imagename}}" download>Download</a>
+                              </td>
+                              <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditPData(i,data['prevyearid']);"></a></span></td>
+                              <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeletePData(i,data['prevyearid']);"></a></span></td>
+                            </tr>
+
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                </div>
+
+              </div>
+
+
+
+              <!-- sample paper start -->
+              <div class="accordion" id="accordionExample1">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
+                        Sample Paper <span>{{samplerecord}}</span>
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapseOne1" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                      <!--<div class="page-header no-gutters has-tab">
+                      <h2 class="font-weight-normal">Previous year Paper</h2>
+
+                    </div>-->
+
+
+                      <form>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Define Name</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="sname" [ngModelOptions]="{standalone: true}" placeholder="Enter Name">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Url</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="surl" [ngModelOptions]="{standalone: true}" placeholder="Enter Url">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Display Text</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="stext" [ngModelOptions]="{standalone: true}" placeholder="Enter Text">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Choose File</label>
+                            <!--<ejs-uploader id='fileupload' [autoUpload]='false' multiple='false' (selected)="GetSummerPdfDetail($event)"></ejs-uploader>-->
+                            <input #inputsamplefile type="File" class="form-control" id="pdf" [(ngModel)]="Selectedsamplefile" name="pdf" placeholder="Upload Pdf" (change)="GetSummerPdfDetail($event)">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Choose Image</label>
+                            <!--<ejs-uploader id='Image' [autoUpload]='false' multiple='false' (selected)="GetSummerImageDetail($event)"></ejs-uploader>-->
+
+                            <input #inputsampleimage type="File" class="form-control" id="Image" [(ngModel)]="SelectedsampleImage" name="img" placeholder="Upload Image" (change)="GetSummerImageDetail($event)">
+                          </div>
+
+                        </div>
+                        <input type="button" class="btn btn-warning m-r-5" value="{{ButtonSampleText}}" style="cursor:pointer" (click)="SampleSave();">
+                        <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearSample();">
+                        <div class="row">
+                          <div class="form-group col-md-4">
+
+                          </div>
+                          <div class="form-group col-md-4">
+                          </div>
+
+                          <div class="form-group col-md-4 search-box pull-right">
+
+                            <input type="text" class="form-control" id="trt" [(ngModel)]="search1" [ngModelOptions]="{standalone: true}" placeholder="Search">
+
+                          </div>
+                        </div>
+                      </form>
+                      <div class="table-responsive m-t-25">
+                        <table id="data-table" class="table">
+                          <thead>
+                            <tr>
+                              <th>Sr.No</th>
+                              <th>Title</th>
+                              <th>Category</th>
+
+                              <th>Name</th>
+                              <th>Text</th>
+                              <th>Url</th>
+                              <!--<th>File</th>
+  <th>Image</th>-->
+                              <!--<th>Material file</th>
+  <th>Image file</th>-->
+                              <th>Edit</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let sampledata of GetSavesampleData | searchfilter:search1;let i = index" style="align-content:center">
+                              <td>{{i+1}}</td>
+                              <td>{{sampledata.prepname}}</td>
+                              <td>{{sampledata.categoryname}}</td>
+
+
+                              <td>{{sampledata.sname}}</td>
+                              <td>{{sampledata.stext}}</td>
+                              <td>{{sampledata.surl}}</td>
+                              <!--<td>
+    <button (click)="handleButtonClick(sampledata.surl)" data-toggle="modal" data-target="#myModal">Play</button>
+  </td>-->
+                              <!--<td>
+    <a *ngIf="sampledata.docname == ''">N/A</a>
+    <a *ngIf="sampledata.docname != ''" href="{{data.docname}}" download>Download</a>
+  </td>
+  <td>
+    <a *ngIf="sampledata.imagename == ''">N/A</a>
+    <a *ngIf="sampledata.imagename != ''" href="{{data.imagename}}" download>Download</a>
+  </td>-->
+
+
+
+                              <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditSData(i,sampledata['sampleid']);"></a></span></td>
+                              <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteSData(i,sampledata['sampleid']);"></a></span></td>
+                            </tr>
+
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                </div>
+
+              </div>
+              <!-- sample paper end -->
+              <!-- Mock test start -->
+              <div class="accordion" id="accordionExample2">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
+                        Mock Test <span>{{Mockrecord}}</span>
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapseOne2" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                      <!--<div class="page-header no-gutters has-tab">
+                      <h2 class="font-weight-normal">Previous year Paper</h2>
+
+                    </div>-->
+
+
+                      <form>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Define Name</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="mname" [ngModelOptions]="{standalone: true}" placeholder="Enter Name">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Url</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="murl" [ngModelOptions]="{standalone: true}" placeholder="Enter Url">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Display Text</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="mtext" [ngModelOptions]="{standalone: true}" placeholder="Enter Text">
+                          </div>
+
+
+
+                        </div>
+                        <input type="button" class="btn btn-warning m-r-5" value="{{ButtonMockText}}" style="cursor:pointer" (click)="MockSave();">
+                        <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearMock();">
+                        <div class="row">
+                          <div class="form-group col-md-4">
+
+                          </div>
+                          <div class="form-group col-md-4">
+                          </div>
+
+                          <div class="form-group col-md-4 search-box pull-right">
+
+                            <input type="text" class="form-control" id="trt" [(ngModel)]="search2" [ngModelOptions]="{standalone: true}" placeholder="Search">
+
+                          </div>
+                        </div>
+                      </form>
+                      <div class="table-responsive m-t-25">
+                        <table id="data-table" class="table">
+                          <thead>
+                            <tr>
+                              <th>Sr.No</th>
+                              <th>Title</th>
+                              <th>Category</th>
+
+                              <th>Name</th>
+                              <th>Text</th>
+                              <th>Url</th>
+                              <!--<th>Material file</th>
+  <th>Image file</th>-->
+                              <th>Edit</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let mockdata of GetSavemockData | searchfilter:search2;let i = index" style="align-content:center">
+                              <td>{{i+1}}</td>
+                              <td>{{mockdata.prepname}}</td>
+                              <td>{{mockdata.categoryname}}</td>
+
+
+                              <td>{{mockdata.mname}}</td>
+                              <td>{{mockdata.mtext}}</td>
+                              <td>{{mockdata.murl}}</td>
+
+                              <!--<td>
+    <button (click)="handleButtonClick(mockdata.murl)" data-toggle="modal" data-target="#myModal">Play</button>
+  </td>-->
+
+
+                              <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditmockData(i,mockdata['mockid']);"></a></span></td>
+                              <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeletemocktestData(i,mockdata['mockid']);"></a></span></td>
+                            </tr>
+
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                </div>
+
+              </div>
+
+
+              <!-- Mock test end -->
+              <!-- Adhoc Mateial start -->
+
+              <div class="accordion" id="accordionExample3">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
+                        Adhoc Material <span>{{adhocrecord}}</span>
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapseOne3" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+
+
+
+                      <form>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Define Name</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="aname" [ngModelOptions]="{standalone: true}" placeholder="Enter Name">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Url</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="aurl" [ngModelOptions]="{standalone: true}" placeholder="Enter Url">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Display Text</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="atext" [ngModelOptions]="{standalone: true}" placeholder="Enter Text">
+                          </div>
+
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Choose File</label>
+                            <!--<ejs-uploader id='fileupload' [autoUpload]='false' multiple='false' (selected)="GetSummerPdfDetail($event)"></ejs-uploader>-->
+                            <input #inputadhocfile type="File" class="form-control" id="pdf" [(ngModel)]="Selectedadhocfile" name="pdf" placeholder="Upload Pdf" (change)="GetAdhocPdfDetail($event)">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Choose Image</label>
+                            <!--<ejs-uploader id='Image' [autoUpload]='false' multiple='false' (selected)="GetSummerImageDetail($event)"></ejs-uploader>-->
+
+                            <input #inputadhocimage type="File" class="form-control" id="Image" [(ngModel)]="SelectedadhocImage" name="img" placeholder="Upload Image" (change)="GetAdhocImageDetail($event)">
+                          </div>
+
+
+
+                        </div>
+                        <input type="button" class="btn btn-warning m-r-5" value="{{ButtonAdhocText}}" style="cursor:pointer" (click)="AdhocSave();">
+                        <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearAdhoc();">
+
+                        <div class="row">
+                          <div class="form-group col-md-4">
+
+                          </div>
+                          <div class="form-group col-md-4">
+                          </div>
+
+                          <div class="form-group col-md-4 search-box pull-right">
+
+                            <input type="text" class="form-control" id="trt" [(ngModel)]="search3" [ngModelOptions]="{standalone: true}" placeholder="Search">
+
+                          </div>
+                        </div>
+
+                      </form>
+                      <div class="table-responsive m-t-25">
+                        <table id="data-table" class="table">
+                          <thead>
+                            <tr>
+                              <th>Sr.No</th>
+                              <th>Title</th>
+                              <th>Category</th>
+
+                              <th>Name</th>
+                              <th>Text</th>
+                              <th>Url</th>
+                              <!--<th>Material file</th>
+  <th>Image file</th>-->
+                              <th>Edit</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let adhocdata of GetSaveadhocData | searchfilter:search3;let i = index" style="align-content:center">
+                              <td>{{i+1}}</td>
+                              <td>{{adhocdata.prepname}}</td>
+                              <td>{{adhocdata.categoryname}}</td>
+
+
+                              <td>{{adhocdata.aname}}</td>
+                              <td>{{adhocdata.atext}}</td>
+                              <td>{{adhocdata.aurl}}</td>
+
+                              <!--<td>
+    <button (click)="handleButtonClick(adhocdata.aurl)" data-toggle="modal" data-target="#myModal">Play</button>
+  </td>-->
+
+
+
+                              <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditadhocData(i,adhocdata['adhocid']);"></a></span></td>
+                              <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteadhoctestData(i,adhocdata['adhocid']);"></a></span></td>
+                            </tr>
+
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                </div>
+
+              </div>
+
+
+
+              <!-- Adhoc Material End -->
+              <!-- prepratory resource start -->
+
+              <div class="accordion" id="accordionExample4">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="true" aria-controls="collapseOne">
+                        Prepratory Resources <span>{{resourcerecord}}</span>
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapseOne4" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+
+
+
+                      <form>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Define Name</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="rname" [ngModelOptions]="{standalone: true}" placeholder="Enter Name">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Author</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="author" [ngModelOptions]="{standalone: true}" placeholder="Enter Author">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Publish</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="publish" [ngModelOptions]="{standalone: true}" placeholder="Enter Publish">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Description</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="description" [ngModelOptions]="{standalone: true}" placeholder="Enter Description">
+                          </div>
+
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Url</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="rurl" [ngModelOptions]="{standalone: true}" placeholder="Entre Url">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Display Text</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="rtext" [ngModelOptions]="{standalone: true}" placeholder="Enter Text">
+                          </div>
+
+
+
+                        </div>
+                        <input type="button" class="btn btn-warning m-r-5" value="{{ButtonResourceText}}" style="cursor:pointer" (click)="ResourceSave();">
+                        <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearResource();">
+                        <div class="row">
+                          <div class="form-group col-md-4">
+
+                          </div>
+                          <div class="form-group col-md-4">
+                          </div>
+
+                          <div class="form-group col-md-4 search-box pull-right">
+
+                            <input type="text" class="form-control" id="trt" [(ngModel)]="search4" [ngModelOptions]="{standalone: true}" placeholder="Search">
+
+                          </div>
+                        </div>
+                      </form>
+                      <div class="table-responsive m-t-25">
+                        <table id="data-table" class="table">
+                          <thead>
+                            <tr>
+                              <th>Sr.No</th>
+                              <th>Title</th>
+                              <th>Category</th>
+
+                              <th>Author</th>
+                              <th>Publish</th>
+                              <th>Description</th>
+                              <th>Name</th>
+                              <th>Text</th>
+                              <th>Url</th>
+                              <!--<th>Material file</th>
+  <th>Image file</th>-->
+                              <th>Edit</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let resourcedata of GetSaveresourceData | searchfilter:search4;let i = index" style="align-content:center">
+                              <td>{{i+1}}</td>
+                              <td>{{resourcedata.prepname}}</td>
+                              <td>{{resourcedata.categoryname}}</td>
+
+                              <td>{{resourcedata.author}}</td>
+                              <td>{{resourcedata.publish}}</td>
+                              <td>{{resourcedata.description}}</td>
+                              <td>{{resourcedata.rname}}</td>
+                              <td>{{resourcedata.rtext}}</td>
+                              <td>{{resourcedata.rurl}}</td>
+
+                              <!--<td>
+    <button (click)="handleButtonClick(resourcedata.rurl)" data-toggle="modal" data-target="#myModal">Play</button>
+  </td>-->
+
+
+
+
+                              <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditresourceData(i,resourcedata['resourceid']);"></a></span></td>
+                              <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteresData(i,resourcedata['resourceid']);"></a></span></td>
+                            </tr>
+
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                </div>
+
+              </div>
+
+              <!-- prepratory resource end -->
+              <!-- online links free start -->
+
+              <div class="accordion" id="accordionExample5">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne5" aria-expanded="true" aria-controls="collapseOne">
+                        Suggestion Online Free Links <span>{{freerecord}}</span>
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapseOne5" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+
+
+
+                      <form>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Define Name</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="fname" [ngModelOptions]="{standalone: true}" placeholder="Enter Name">
+                          </div>
+
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Description</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="fdescription" [ngModelOptions]="{standalone: true}" placeholder="Enter Description">
+                          </div>
+
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Url</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="furl" [ngModelOptions]="{standalone: true}" placeholder="Entre Url">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Display Text</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="ftext" [ngModelOptions]="{standalone: true}" placeholder="Enter Text">
+                          </div>
+
+
+
+                        </div>
+                        <input type="button" class="btn btn-warning m-r-5" value="{{ButtonFreeText}}" style="cursor:pointer" (click)="FreeSave();">
+                        <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearFree();">
+                        <div class="row">
+                          <div class="form-group col-md-4">
+
+                          </div>
+                          <div class="form-group col-md-4">
+                          </div>
+
+                          <div class="form-group col-md-4 search-box pull-right">
+
+                            <input type="text" class="form-control" id="trt" [(ngModel)]="search5" [ngModelOptions]="{standalone: true}" placeholder="Search">
+
+                          </div>
+                        </div>
+                      </form>
+                      <div class="table-responsive m-t-25">
+                        <table id="data-table" class="table">
+                          <thead>
+                            <tr>
+                              <th>Sr.No</th>
+                              <th>Title</th>
+                              <th>Category</th>
+
+                              <th>Name</th>
+                              <th>Description</th>
+                              <th>Text</th>
+                              <th>Url</th>
+
+                              <th>Edit</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let freedata of GetSavefreeData | searchfilter:search5;let i = index" style="align-content:center">
+                              <td>{{i+1}}</td>
+                              <td>{{freedata.prepname}}</td>
+                              <td>{{freedata.categoryname}}</td>
+
+                              <td>{{freedata.fname}}</td>
+                              <td>{{freedata.fdescription}}</td>
+
+                              <td>{{freedata.ftext}}</td>
+                              <td>{{freedata.furl}}</td>
+                              <!--<td>
+    <button (click)="handleButtonClick(freedata.furl)" data-toggle="modal" data-target="#myModal">Play</button>
+  </td>-->
+
+
+
+
+                              <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditfreeData(i,freedata['freeid']);"></a></span></td>
+                              <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeletefData(i,freedata['freeid']);"></a></span></td>
+                            </tr>
+
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                </div>
+
+              </div>
+
+              <!-- online links free end -->
+              <!-- online link paid start -->
+
+              <div class="accordion" id="accordionExample6">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne6" aria-expanded="true" aria-controls="collapseOne">
+                        Suggestion Online Paid Links <span>{{paidrecord}}</span>
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapseOne6" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+
+
+
+                      <form>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Define Name</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="paidname" [ngModelOptions]="{standalone: true}" placeholder="Enter Name">
+                          </div>
+
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Description</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="paiddescription" [ngModelOptions]="{standalone: true}" placeholder="Enter Description">
+                          </div>
+
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Url</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="paidurl" [ngModelOptions]="{standalone: true}" placeholder="Entre Url">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label class="font-weight-semibold" for="phoneNumber">Display Text</label>
+                            <input type="text" class="form-control" id="intrest" [(ngModel)]="paidtext" [ngModelOptions]="{standalone: true}" placeholder="Enter Text">
+                          </div>
+
+
+
+                        </div>
+                        <input type="button" class="btn btn-warning m-r-5" value="{{ButtonpaidText}}" style="cursor:pointer" (click)="paidSave();">
+                        <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearpaid();">
+                        <div class="row">
+                          <div class="form-group col-md-4">
+
+                          </div>
+                          <div class="form-group col-md-4">
+                          </div>
+
+                          <div class="form-group col-md-4 search-box pull-right">
+
+                            <input type="text" class="form-control" id="trt" [(ngModel)]="search6" [ngModelOptions]="{standalone: true}" placeholder="Search">
+
+                          </div>
+                        </div>
+                      </form>
+                      <div class="table-responsive m-t-25">
+                        <table id="data-table" class="table">
+                          <thead>
+                            <tr>
+                              <th>Sr.No</th>
+                              <th>Category</th>
+                              <th>Title</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                              <th>Text</th>
+                              <th>Url</th>
+
+                              <th>Edit</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let paiddata of GetSavepaidData | searchfilter:search6;let i = index" style="align-content:center">
+                              <td>{{i+1}}</td>
+                              <td>{{paiddata.categoryname}}</td>
+                              <td>{{paiddata.prepname}}</td>
+                              <td>{{paiddata.paidname}}</td>
+                              <td>{{paiddata.paiddescription}}</td>
+
+                              <td>{{paiddata.paidtext}}</td>
+                              <td>{{paiddata.paidurl}}</td>
+
+                              <!--<td>
+                                <button (click)="handleButtonClick(paiddata.paidurl)" data-toggle="modal" data-target="#myModal">Play</button>
+                              </td>-->
+
+
+                              <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditpaidData(i,paiddata['paidid']);"></a></span></td>
+                              <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeletepaidlinkData(i,paiddata['paidid']);"></a></span></td>
+                            </tr>
+
+
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                </div>
+
+              </div>
+
+              <!-- online link paid end -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- video modal pop up start -->
+
+    <!--<div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="top-image" [innerHTML]="yt | safe:'html'"></div>
+
+          <br>
+
+          <div #myDiv></div>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>-->
+
+    <!-- video modal pop up ends -->
+
+
+  </div>
+</div>
+
+
+<!-- Core Vendors JS -->
+<!--<script src="assets/js/vendors.min.js"></script>-->
+
+<!-- page js -->
+<!-- Core JS -->
+<!--<script src="assets/js/app.min.js"></script>-->

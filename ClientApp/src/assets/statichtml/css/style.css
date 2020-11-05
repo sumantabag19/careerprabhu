@@ -1,0 +1,26 @@
+.logo-login img.img-fluid, .logo-login img {
+    max-width: 200px;
+    margin-bottom: 30px;
+}
+textarea.main-area {
+    padding: .55rem 1rem;
+    height: auto;
+    color: #53535f;
+    border: 1px solid #edf2f9;
+    font-size: .875rem;
+    line-height: 1.5;
+    width: 100%;
+}
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.cdk-overlay-container {
+  position: absolute;
+  top: 250px;
+  left: 180px;
+  width: 300px;
+  background: #f6f6f6;
+}
+
+.table-responsive {
+  HEIGHT: 380px !important;
+}

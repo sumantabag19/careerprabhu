@@ -1,0 +1,192 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+    <TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
+    <TypeScriptEmitDecoratorMetadata>True</TypeScriptEmitDecoratorMetadata>
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Auth0.ManagementApi" Version="7.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Azure.Management.Storage" Version="17.1.1" />
+    <PackageReference Include="MySql.Data" Version="8.0.18" />
+    <PackageReference Include="VimeoDotNet" Version="2.0.0.21" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Content Remove="$(SpaRoot)**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\AuthGuard.Service.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\boards\boards.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\country\country.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\entranceexam\entranceexam.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\guideline\guideline.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\lifecoachactivity\lifecoachactivity.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\lifecoachesinfo\lifecoachesinfo.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\lifecoaches\lifecoaches.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\lifecoachinformation\lifecoachinformation.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\lifecoachtopic\DynamicGrid.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\lifecoachtopic\lifecoachtopic.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\lifecoachtypemaster\lifecoachtypemaster.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\Login\login.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\collegerepository\collegerepository.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\lifecoachagenda\lifecoachagenda.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\paidfeature\paidfeature.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\permission\permission.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\personalessay\personalessay.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\placement\placement.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\plannedactivity\plannedactivity.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\portfolio\portfolio.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\prepnamemaster\prepname.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\prepratorymaterial\prepratorymaterial.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\principalregistration\principalregistration.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\productmaster\productmaster.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\productusage\productusage.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\productwisecoupon\productwisecoupon.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\professionalmaster\professionalmaster.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\professionalsop\professionalsop.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\report\report.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\sampleessay\sampleessay.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\sampleportfolio\sampleportfolio.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\samplesop\samplesop.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\SignUp\signup.component.js" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\SignUp\signup.component.js.map" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\SignUp\signup.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\SOPintrestmaster\sopintrestmaster.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\ssrepository\ssrepository.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\statemaster\statemaster.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\studentplacement\placement.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\Subscription\subscription.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\summerschooltopic\summertopic.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\summerschool\filtersummerschoolgrid.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\summerschool\summerschool.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\traitmaster\traitmaster.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\universitymaster\universitymaster.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\uploadmaterial\uploadmaterial.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\uploadvideopdf\filtergrid.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\uploadvideopdf\uploadvideopdf.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\Webinar\webinar.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\adminpanel\welcompage\welcome.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\landingpagelayouts\header\header.component.ts" />
+    <None Remove="ClientApp\src\app\Layouts\landingpagelayouts\sidebar\sidebar.component.ts" />
+    <None Remove="ClientApp\src\app\material.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\Layouts\landingpagelayouts\home\" />
+    <Folder Include="ClientApp\src\app\Layouts\landingpagelayouts\footer\" />
+    <Folder Include="ClientApp\src\assets\statichtml\fonts\" />
+    <Folder Include="ClientApp\src\assets\statichtml\js\" />
+    <Folder Include="ClientApp\src\assets\statichtml\vendors\" />
+    <Folder Include="wwwroot\masterupload\" />
+    <Folder Include="wwwroot\lifecoachactivity\" />
+    <Folder Include="wwwroot\SOP\" />
+    <Folder Include="wwwroot\sampleportfoliopdf\" />
+    <Folder Include="wwwroot\uploadlifecoachpdf\" />
+    <Folder Include="wwwroot\sampleimage\" />
+    <Folder Include="wwwroot\samplepdf\" />
+    <Folder Include="wwwroot\prviousyearimage\" />
+    <Folder Include="wwwroot\previousyearpdf\" />
+    <Folder Include="wwwroot\uploadportfoliopdf\" />
+    <Folder Include="wwwroot\uploadpersonalessaypdf\" />
+    <Folder Include="wwwroot\uploadpersonalessayvideo\" />
+    <Folder Include="wwwroot\uploadimages\" />
+    <Folder Include="wwwroot\uploadvideos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\AuthGuard.Service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\boards\boards.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\country\country.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\entranceexam\entranceexam.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\guideline\guideline.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\lifecoachactivity\lifecoachactivity.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\lifecoachesinfo\lifecoachesinfo.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\lifecoaches\lifecoaches.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\lifecoachinformation\lifecoachinformation.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\lifecoachtopic\DynamicGrid.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\lifecoachtopic\lifecoachtopic.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\lifecoachtypemaster\lifecoachtypemaster.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\Login\login.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\collegerepository\collegerepository.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\lifecoachagenda\lifecoachagenda.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\paidfeature\paidfeature.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\permission\permission.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\personalessay\personalessay.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\placement\placement.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\plannedactivity\plannedactivity.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\portfolio\portfolio.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\prepnamemaster\prepname.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\prepratorymaterial\prepratorymaterial.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\principalregistration\principalregistration.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\productmaster\productmaster.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\productusage\productusage.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\productwisecoupon\productwisecoupon.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\professionalmaster\professionalmaster.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\professionalsop\professionalsop.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\report\report.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\sampleessay\sampleessay.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\sampleportfolio\sampleportfolio.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\samplesop\samplesop.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\SOPintrestmaster\sopintrestmaster.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\ssrepository\ssrepository.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\statemaster\statemaster.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\studentplacement\placement.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\Subscription\subscription.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\summerschooltopic\summertopic.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\summerschool\filtersummerschoolgrid.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\summerschool\summerschool.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\traitmaster\traitmaster.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\universitymaster\universitymaster.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\uploadmaterial\uploadmaterial.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\uploadvideopdf\filtergrid.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\uploadvideopdf\uploadvideopdf.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\Webinar\webinar.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\adminpanel\welcompage\welcome.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\landingpagelayouts\header\header.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Layouts\landingpagelayouts\sidebar\sidebar.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\material.module.ts" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

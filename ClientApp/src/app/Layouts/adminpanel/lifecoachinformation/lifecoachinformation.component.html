@@ -1,0 +1,215 @@
+<div class="app">
+  <div class="layout">
+
+    <!-- Page Container START -->
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Life Coaches Information</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+
+              <form>
+                <div class="form-row main-custom">
+
+
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select Coach Type</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedtopic" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select Coach Type--</option>
+                      <option *ngFor="let topic of TopicData" value={{topic.ID}}>
+                        {{topic.topic}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select Agenda Type</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedagenda" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select Agenda Type--</option>
+                      <option *ngFor="let agenda of AgendaData" value={{agenda.coachid}}>
+                        {{agenda.agenda}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">Topic</label>
+                    <input type="text" class="form-control" id="topicname" [(ngModel)]="topic" [ngModelOptions]="{standalone: true}" placeholder="Enter Topic Name">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">Coach Name</label>
+                    <input type="text" class="form-control" id="coachname" [(ngModel)]="coachname" [ngModelOptions]="{standalone: true}" placeholder="Enter Coach Name">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">Mobile No</label>
+                    <input type="text" class="form-control" id="mobile" [(ngModel)]="mobileno" [ngModelOptions]="{standalone: true}" placeholder="Enter Mobile No" maxlength="10">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">Email</label>
+                    <input type="text" class="form-control" id="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="Enter Email">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">Facebook ID</label>
+                    <input type="text" class="form-control" id="fbid" [(ngModel)]="fbid" [ngModelOptions]="{standalone: true}" placeholder="Enter Facebook ID">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">LinkedIn ID</label>
+                    <input type="text" class="form-control" id="linked" [(ngModel)]="linkedin" [ngModelOptions]="{standalone: true}" placeholder="Enter LinkedIn ID">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="language">Upload Photo</label>
+
+
+                    <input #inputfile type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage" name="img" placeholder="Upload Photo" (change)="GetPhotoDetail($event)">
+                  </div>
+
+                  <div class="form-group col-md-4">
+
+                    <div class="bg-color">
+                      <label class="font-weight-semibold">Select Career</label>
+
+                      <ul class="list_brdr">
+                        <span class="checkAll">
+                          <li>
+                            <input type="checkbox"
+                                   name="CareerSelected"
+                                   id="select-all3"
+                                   [(ngModel)]="AllCareer"
+                                   (change)="SelectAllCareer();"
+                                   [ngModelOptions]="{standalone: true}">&nbsp;Select All Careers
+                          </li>
+                        </span>
+                        <span class="all_lists">
+                          <li *ngFor="let career of careerdata">
+                            <input type="checkbox"
+                                   class="city_check"
+                                   name="CareerSelected"
+                                   value="{{ career.careerid }}"
+                                   [(ngModel)]="career.selected"
+                                   (change)="getSelectedCareer();"
+                                   [ngModelOptions]="{standalone: true}">{{ career.careername }}
+                          </li>
+                        </span>
+                      </ul>
+
+                    </div>
+                  </div>
+
+
+
+                  <div class="form-group col-md-12">
+
+                    <label class="font-weight-semibold" for="description">Description</label>
+                    <textarea class="main-area" rows="4" cols="45" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
+
+                  </div>
+
+
+                </div>
+
+
+              </form>
+
+            </div>
+
+            <div class="card-body">
+              <form>
+                <input type="button" class="btn btn-warning m-r-5" value="{{ButtonInterviewsText}}" style="cursor:pointer" (click)="InterviewSave();">
+                <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClearInterviews();">
+
+
+
+                <div class="table-responsive m-t-25">
+                  <table id="data-table" class="table">
+                    <thead>
+                      <tr>
+                        <th>Sr.No</th>
+                        <th>Coach Type</th>
+                        <th>Agenda Type</th>
+                        <th>Topic</th>
+
+                        <th>Coach Name</th>
+                        <th>Mobile No.</th>
+                        <th>Email</th>
+                        <th>Facebook ID</th>
+                        <th>LinkedIn ID</th>
+                        <th>Career</th>
+                        <th>Image</th>
+
+                        <th>Desription</th>
+
+                        <th>Edit</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                        <td>{{i+1}}</td>
+                        <td>{{data.coachtype}}</td>
+                        <td>{{data.agendatype}}</td>
+                        <td>{{data.topic}}</td>
+
+                        <td>{{data.coachname}}</td>
+
+                        <td>{{data.mobileno}}</td>
+                        <td>{{data.email}}</td>
+                        <td>{{data.fbid}}</td>
+
+                        <td>{{data.linkedinid}}</td>
+                        <td>{{data.careername}}</td>
+                        <td>
+                          <a *ngIf="data.photo == ''">N/A</a>
+                          <a *ngIf="data.photo != ''" href="{{data.photo}}" download>Download</a>
+                        </td>
+
+                        <td>{{data.description}}</td>
+
+
+                        <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditInterview(i,data['interviewid']);"></a></span></td>
+                        <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteInterview(i,data['interviewid']);"></a></span></td>
+                      </tr>
+                    </tbody>
+
+                  </table>
+                </div>
+
+
+
+
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Content Wrapper END -->
+    <!-- Footer START -->
+    <!-- Footer END -->
+
+  </div>
+
+
+</div>
+
+
+
+<!-- Core Vendors JS -->
+<!--<script src="assets/js/vendors.min.js"></script>-->
+<!-- page js -->
+<!-- Core JS -->
+<!--<script src="assets/js/app.min.js"></script>
+<script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>-->

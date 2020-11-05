@@ -1,0 +1,63 @@
+.logo-login img.img-fluid, .logo-login img {
+    max-width: 200px;
+    margin-bottom: 30px;
+}
+textarea.main-area {
+    padding: .55rem 1rem;
+    height: auto;
+    color: #53535f;
+    border: 1px solid #edf2f9;
+    font-size: .875rem;
+    line-height: 1.5;
+    width: 100%;
+}
+a.Edit {
+    font-size: 23px;
+    color: green;
+}
+a.delete {
+    font-size: 23px;
+    color: red;
+}
+.custom-date {
+    background: blue;
+    max-height: 500px;
+    min-height: 190px;
+    font-size: 40px;
+    text-align: center;
+    padding: 20px 0px;
+    color: #bfbfea;
+}
+.coming-up h2 {
+    color: #ffff;
+    text-transform: uppercase;
+}
+.coming-up {
+    margin: 20px 0px 0px;
+    background: #04219f;
+    padding: 20px;
+    min-height: 245px;
+}
+.coming-up h2 time {
+    float: right;
+}
+.custom-button button {
+    margin: 0 !important;
+}
+a.planned {
+    color: #fff !Important;
+    vertical-align: bottom;
+    margin-top: 30%;
+    display: inline-block;
+    font-size: 25px;
+	font-style:italic
+}
+.boxes-layout .card {
+    min-height: 111px;
+}
+
+
+
+
+
+

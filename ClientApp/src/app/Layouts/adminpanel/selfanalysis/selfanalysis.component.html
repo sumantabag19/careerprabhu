@@ -1,0 +1,120 @@
+<div class="page-container">
+  <div class="main-content">
+    <div class="page-header no-gutters has-tab">
+      <h2 class="font-weight-normal">Self Analysis</h2>
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-body">
+
+        <form>
+
+          <div class="form-row main-custom">
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold" for="intar">Select Class</label>
+              <select id="Class" class="form-control" [(ngModel)]="Selectedclass" (change)="BindStreamOnChnageClass();" name="cls" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--Select Class--</option>
+                <option *ngFor="let class of ClassData" value={{class.classid}}>
+                  {{class.classname}}
+                </option>
+              </select>
+            </div>
+            
+
+
+            
+              <div class="form-group col-md-4" *ngIf="showstream==1">
+                <label class="font-weight-semibold" for="intar">Select Stream</label>
+                <select id="Class" class="form-control" [(ngModel)]="Selectedstream" name="cls" [ngModelOptions]="{standalone: true}">
+                  <option value="0" selected>--Select Stream--</option>
+                  <option *ngFor="let stream of StreamData" value={{stream.streamid}}>
+                    {{stream.streamname}}
+                  </option>
+                </select>
+              
+              </div>
+
+
+              <div class="form-group col-md-12">
+                <label class="font-weight-semibold" for="description">Description</label>
+                <textarea class="main-area" rows="4" cols="50" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
+
+
+
+                <!--<label class="font-weight-semibold" for="language">Guideline</label>
+    <input type="text" class="form-control" id="guid" [(ngModel)]="guideline" [ngModelOptions]="{standalone: true}" placeholder="Enter guideline">-->
+
+              </div>
+              <div class="form-group col-md-12">
+                <label class="font-weight-semibold" for="dob">Instruction</label>
+                <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="instruction" height="400px" name="first"></angular-editor>
+                <!--<input type="text" class="form-control" id="Testimonial" [(ngModel)]="testimonial" [ngModelOptions]="{standalone: true}" placeholder="Enter testimonial">-->
+
+              </div>
+
+
+
+
+</div>
+            
+</form>
+      </div>
+
+
+
+
+      <div class="card-body">
+        <form>
+
+
+          <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+          <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+        </form><br>
+
+        <!--Dynamic table bind-->
+        <div class="m-t-25">
+          <div class="table-responsive">
+            <table id="data-table" class="table">
+              <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                  <th>Class</th>
+                  <!--<th>Stream</th>-->
+
+                  <th>Description</th>
+                  <th>Instruction</th>
+
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                  <td>{{i+1}}</td>
+                  <td>{{data.classes}}</td>
+                  <!--<td>{{data.stream}}</td>-->
+
+                  <td>{{data.description}}</td>
+                  <td>{{data.instruction}}</td>
+
+
+                  <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                  <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['analysisid']);"></a></span></td>
+                  <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['analysisid']);"></a></span></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+

@@ -1,0 +1,180 @@
+<div class="app">
+  <div class="layout">
+
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Add Student</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+              <div class="row">
+
+              </div>
+              <form>
+                <div class="form-row main-custom">
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Student Name</label>
+                    <input type="text" class="form-control" id="loc" [(ngModel)]="studentname" [ngModelOptions]="{standalone: true}" placeholder="Enter Student Name">
+
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select State</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedstate" (change)="BindCity();" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select State--</option>
+                      <option *ngFor="let state of StateData" value={{state.stateid}}>
+                        {{state.state}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select City</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedcity" (change)="BindSchool();" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select City--</option>
+                      <option *ngFor="let city of CityData" value={{city.cityid}}>
+                        {{city.cityname}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="language">Select School</label>
+                    <select id="Topic" class="form-control" [(ngModel)]="selectedschool" name="topi" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select School--</option>
+                      <option *ngFor="let school of SchoolData" value={{school.schoolid}}>
+                        {{school.schoolname}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select Class</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedclass" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select Class--</option>
+                      <option *ngFor="let class of ClassData" value={{class.classid}}>
+                        {{class.classname}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="language">Select Stream</label>
+                    <select id="Topic" class="form-control" [(ngModel)]="selectedstream" name="topi" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select Stream--</option>
+                      <option *ngFor="let stream of StreamData" value={{stream.streamid}}>
+                        {{stream.streamname}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4" *ngIf="isshow==1">
+
+                    <label class="font-weight-semibold" for="locat">Email</label>
+                    <input type="text" class="form-control" id="cou" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="Enter Email">
+
+                  </div>
+                  <div class="form-group col-md-4" *ngIf="isshow==1">
+
+                    <label class="font-weight-semibold" for="locat">Mobile No</label>
+                    <input type="text" class="form-control" id="spec" [(ngModel)]="mobileno" [ngModelOptions]="{standalone: true}" placeholder="Enter MobileNo" maxlength="10">
+
+                  </div>
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Fathers Name</label>
+                    <input type="text" class="form-control" id="spec" [(ngModel)]="fathersname" [ngModelOptions]="{standalone: true}" placeholder="Enter Fathers Name">
+
+                  </div>
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Parent Email</label>
+                    <input type="text" class="form-control" id="spec" [(ngModel)]="parentemail" [ngModelOptions]="{standalone: true}" placeholder="Enter Email">
+
+                  </div>
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Parent MobileNo</label>
+                    <input type="text" class="form-control" id="spec" [(ngModel)]="parentmobileno" [ngModelOptions]="{standalone: true}" placeholder="Enter Parents MobileNo" maxlength="10">
+
+                  </div>
+
+                </div>
+                <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+                <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+
+
+
+
+
+
+              </form>
+              <div class="table-responsive m-t-25">
+                <table id="data-table" class="table">
+                  <thead>
+                    <tr>
+                      <th>SNo.</th>
+
+                      <th>Student Name</th>
+                      <th>State</th>
+                      <th>City</th>
+                      <th>School</th>
+                      <th>Class</th>
+                      <th>Stream</th>
+                      <th>Email</th>
+                      <th>Mobile No</th>
+                      <th>Fathers Name</th>
+                      <th>Parent Email</th>
+                      <th>Parent MobileNo</th>
+
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                      <td>{{i+1}}</td>
+                      <td>{{data.studentname}}</td>
+                      <td>{{data.state}}</td>
+                      <td>{{data.city}}</td>
+                      <td>{{data.school}}</td>
+                      <td>{{data.classes}}</td>
+                      <td>{{data.stream}}</td>
+                      <td>{{data.email}}</td>
+                      <td>{{data.mobileno}}</td>
+                      <td>{{data.fathersname}}</td>
+                      <td>{{data.parentemail}}</td>
+                      <td>{{data.parentmobileno}}</td>
+
+                      <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['studentid']);"></a></span></td>
+                      <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['studentid']);"></a></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+  </div>
+</div>
+

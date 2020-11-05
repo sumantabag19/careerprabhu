@@ -1,0 +1,291 @@
+<div class="page-container">
+  <div class="main-content">
+    <div class="page-header no-gutters has-tab">
+      <h2 class="font-weight-normal">Subscription</h2>
+    </div>
+
+
+    <div class="card">
+     
+      <div class="card-body">
+
+        <form>
+
+          <div class="form-row">
+
+            
+              <div class="form-group col-md-3">
+                <label class="font-weight-semibold" for="phoneNumber">Start Date </label>
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="d3" #c3="ngModel" [(ngModel)]="startdate" ngbDatepicker #d3="ngbDatepicker" (click)="d3.toggle()">
+              </div>
+            
+
+
+            
+              <div class="form-group col-md-3">
+                <label class="font-weight-semibold" for="phoneNumber">Start time</label>
+                <ngb-timepicker [(ngModel)]="starttime" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
+              </div>
+            
+
+            
+              <div class="form-group col-md-3">
+                <label class="font-weight-semibold" for="phoneNumber">End Date </label>
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="d2" #c2="ngModel" [(ngModel)]="enddate" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+              </div>
+            
+            
+              <div class="form-group col-md-3">
+                <label class="font-weight-semibold" for="phoneNumber">End Time</label>
+                <ngb-timepicker [(ngModel)]="endtime" [ngModelOptions]="{standalone: true}"></ngb-timepicker>
+              </div>
+         
+
+
+
+
+
+
+
+            <div class="form-group col-md-4">
+              <ul class="list_brdr">
+                <span class="checkAll">
+                  <li>
+                    <input type="checkbox"
+                           name="StateSelected"
+                           id="select-all3"
+                           [(ngModel)]="AllState"
+                           (change)="SelectAllState();onChangeOfMultiCheckBoxToGetCity();onChangeOfMultiCheckBoxToGetSchool();"
+                           [ngModelOptions]="{standalone: true}">&nbsp;Select All States
+                  </li>
+                </span>
+                <span class="all_lists">
+                  <li *ngFor="let state of StateData">
+                    <input type="checkbox"
+                           class="city_check"
+                           name="StateSelected"
+                           value="{{ state.stateId }}"
+                           [(ngModel)]="state.selected"
+                           (change)="SelectedState();onChangeOfMultiCheckBoxToGetCity();onChangeOfMultiCheckBoxToGetSchool();"
+                           [ngModelOptions]="{standalone: true}">{{ state.statename }}
+                  </li>
+                </span>
+              </ul>
+            </div>
+
+            <div class="form-group col-md-4">
+              <ul class="list_brdr">
+                <span class="checkAll">
+                  <li>
+                    <input type="checkbox"
+                           name="StateSelected"
+                           id="select-all3"
+                           [(ngModel)]="AllCity"
+                           (change)="SelectAllCity();onChangeOfMultiCheckBoxToGetSchool();"
+                           [ngModelOptions]="{standalone: true}">&nbsp;Select All Cities
+                  </li>
+                </span>
+                <span class="all_lists">
+                  <li *ngFor="let city of CityData">
+                    <input type="checkbox"
+                           class="city_check"
+                           name="StateSelected"
+                           value="{{ city.cityid }}"
+                           [(ngModel)]="city.selected"
+                           (change)="SelectedCity();onChangeOfMultiCheckBoxToGetSchool();"
+                           [ngModelOptions]="{standalone: true}">{{ city.cityname }}
+                  </li>
+                </span>
+              </ul>
+            </div>
+
+            <div class="form-group col-md-4">
+              <ul class="list_brdr">
+                <span class="checkAll">
+                  <li>
+                    <input type="checkbox"
+                           name="SchoolSelected"
+                           id="select-all3"
+                           [(ngModel)]="AllSchool"
+                           (change)="SelectAllSchool();" [ngModelOptions]="{standalone: true}">&nbsp;Select All Schools
+                  </li>
+                </span>
+                <span class="all_lists">
+                  <li *ngFor="let school of SchoolData">
+                    <input type="checkbox"
+                           class="city_check"
+                           name="SchoolSelected"
+                           value="{{ school.schoolid }}"
+                           [(ngModel)]="school.selected"
+                           (change)="SelectedSchool();" [ngModelOptions]="{standalone: true}">{{ school.schoolname }}
+                  </li>
+                </span>
+              </ul>
+            </div>
+
+          </div>
+
+
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <div class="form-group">
+                <div class="checkbox">
+                  <input id="gridCheck" type="checkbox" style="cursor:pointer" [(ngModel)]="IsSchool" [ngModelOptions]="{standalone: true}">
+                  <label for="gridCheck">School Manager</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <div class="form-group">
+                <div class="checkbox">
+                  <input id="gridCheck1" type="checkbox" style="cursor:pointer" [(ngModel)]="IsParent" [ngModelOptions]="{standalone: true}" (change)="onChangeOfCheckBox()">
+                  <label for="gridCheck1">Parents</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-2">
+              <div class="form-group">
+                <div class="checkbox">
+                  <input id="gridCheck2" type="checkbox" style="cursor:pointer" [(ngModel)]="IsStudent" [ngModelOptions]="{standalone: true}" (change)="onChangeOfCheckBox()">
+                  <label for="gridCheck2">Student</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+
+
+
+
+      <div class="card-body">
+        <form>
+          <div class="form-row" *ngIf="ShowDiv">
+
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold">Select Class</label>
+              <select id="City" class="form-control" [(ngModel)]="SelectedClass" (change)="onChangeOfdropdown();" [ngModelOptions]="{standalone: true}">
+                <option value="0">--All--</option>
+                <option *ngFor="let class of ClassData" value="{{class.classid}}">
+                  {{class.classname}}
+                </option>
+              </select>
+
+
+
+            </div>
+
+            <div class="form-group col-md-4" *ngIf="showstream==1">
+              <label class="font-weight-semibold">Select Stream</label>
+              <select id="City" class="form-control" [(ngModel)]="SelectedStream" (change)="onChangeOfdropdown();" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--All--</option>
+                
+                <option value="Commerce">Commerce </option>
+                <option value="Humanities/Arts">Humanities/Arts </option>
+                <option value="Non Medical">Non Medical </option>
+                <option value="Medical">Medical </option>
+              </select>
+
+            </div>
+
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold">Select Student</label>
+              <select id="City" class="form-control" [(ngModel)]="SelectedStudent" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--All--</option>
+                <option *ngFor="let student of StudentData" value={{student.studentid}}>
+                  {{student.studentname}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label class="font-weight-semibold" for="phoneNumber">Message</label>
+              <textarea class="main-area" rows="4" cols="50" [(ngModel)]="Message" [ngModelOptions]="{standalone: true}"></textarea>
+            </div>
+          </div>
+
+
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label class="font-weight-semibold" for="phoneNumber">Testimonials</label>
+              <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="testimonial" height="400px" name="first"></angular-editor>
+
+            </div>
+            </div>
+
+
+
+
+            <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+            <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+        </form><br>
+
+        <!--Dynamic table bind-->
+        <div class="table-responsive m-t-25">
+          <table id="" class="table th-hidden">
+            <thead>
+              <tr>
+                <th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>
+                <!--<th>Start Date Time</th>
+          <th>End Date Time</th>
+          <th>State<th>
+          <th>City<th>
+          <th>School<th>
+          <th>Class<th>
+          <th>Stream<th>
+          <th>Student<th>
+          <th>Message</th>-->
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of GetSaveData.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);let i = index" style="align-content:center">
+                <td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>
+                <!--<td>{{data.startdatetime}}</td>
+          <td>{{data.enddatetime}}</td>
+          <td>{{date.State}}</td>
+          <td>{{data.City}}</td>
+          <td>{{data.School}}</td>
+          <td>{{data.Class}}</td>
+          <td>{{data.Stream}}</td>
+          <td>{{data.Student}}</td>
+          <td>{{data.Message}}</td>-->
+
+                <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['SubscriptionId']);"></a></span></td>
+                <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['SubscriptionId']);"></a></span></td>
+              </tr>
+            </tbody>
+
+          </table>
+          </div>
+          <div class="form-group col-md-12">
+            <ngb-pagination class="float-left" [collectionSize]="GetSaveData.length" [(page)]="page" [pageSize]="pageSize">
+            </ngb-pagination>
+            <select class="custom-select float-right" style="width: auto" [(ngModel)]="pageSize">
+              <option [ngValue]="2">2 items per page</option>
+              <option [ngValue]="10">10 items per page</option>
+              <option [ngValue]="50">50 items per page</option>
+              <option [ngValue]="100">100 items per page</option>
+            </select>
+          </div>
+
+
+
+        </div>
+      </div>
+</div>
+</div>
+
+
+
+
+
+

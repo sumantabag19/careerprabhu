@@ -1,0 +1,113 @@
+<div class="app">
+  <div class="layout">
+
+    <!-- Page Container START -->
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Upload Video/PDF</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select Page</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedpage" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select Page--</option>
+                      <option *ngFor="let page of pagedata" value={{page.pageid}}>
+                        {{page.pagename}}
+                      </option>
+                    </select>
+                  </div>
+
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">Link</label>
+                    <input type="text" class="form-control" id="videolnk" [(ngModel)]="videolink" [ngModelOptions]="{standalone: true}" placeholder="Enter Link">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="language">Upload File</label>
+                    <!--<ejs-uploader id='fileupload' [autoUpload]='false' multiple='false' (selected)="GetPdfDetail($event)"></ejs-uploader>-->
+
+                    <input #inputfile type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage" name="pdf" placeholder="Upload Pdf" (change)="GetPdfDetail($event)">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select Language</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedlanguage" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select Language--</option>
+                      <option *ngFor="let language of languagedata" value={{language.languageid}}>
+                        {{language.languagetype}}
+                      </option>
+                    </select>
+                  </div>
+
+
+                </div>
+                <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSave();">
+                <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+
+              </form>
+              <div class="m-t-25">
+                <div class="table-responsive">
+                  <table id="data-table" class="table">
+                    <thead>
+                      <tr>
+                        <th>SNo.</th>
+                        <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+
+
+                        <th>Page Name</th>
+                        <th>Language</th>
+
+                        <th>Video</th>
+                        <th>PDF</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                        <td>{{i+1}}</td>
+                        <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+
+                        <td>{{data.pagename}}</td>
+                        <td>{{data.languagetype}}</td>
+
+                        <td>{{data.videolink}}</td>
+                        <td>{{data.orgpdfname}}</td>
+
+
+
+                        <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['vid_pdfid']);"></a></span></td>
+                        <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['vid_pdfid']);"></a></span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Content Wrapper END -->
+
+
+    </div>
+
+
+
+
+  </div>
+</div>
+

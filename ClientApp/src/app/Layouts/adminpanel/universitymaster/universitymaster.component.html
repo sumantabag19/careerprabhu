@@ -1,0 +1,211 @@
+
+  <div class="page-container">
+    <div class="main-content">
+      <div class="page-header no-gutters has-tab">
+        <h2 class="font-weight-normal">University Master</h2>
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-body">
+
+          <form>
+
+            <div class="form-row main-custom">
+
+              <div class="form-group col-md-4">
+                <label class="font-weight-semibold" for="cou">Select Country</label>
+                <select id="Stream" class="form-control" [(ngModel)]="selectedcountry" (change)="BindLocation();" [ngModelOptions]="{standalone: true}">
+                  <option value="0" selected>--Select Country--</option>
+                  <option *ngFor="let country of CountryData" value={{country.countryid}}>
+                    {{country.countryname}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="font-weight-semibold" for="language">Select State</label>
+                <select id="Stream" class="form-control" [(ngModel)]="selectedlocation" (change)="BindCity();" [ngModelOptions]="{standalone: true}">
+                  <option value="0" selected>--Select State--</option>
+                  <option *ngFor="let location of LocationData" value={{location.locationid}}>
+                    {{location.location}}
+                  </option>
+                </select>
+              </div>
+
+
+
+
+
+              <div class="form-group col-md-2">
+                <button class="w3-button w3-yellow w3-border" title="Add Location" href="#myModal111" data-toggle="modal" data-target="#myModal111">+</button>
+                <!--<a class="onclickdiv" href="#myModal111" data-toggle="modal" data-target="#myModal111"><i class="anticon anticon-plus"></i></a>-->
+              </div>
+
+
+
+              <div class="form-group col-md-4">
+                <label class="font-weight-semibold" for="language">Select City</label>
+                <select id="Stream" class="form-control" [(ngModel)]="selectedcity" [ngModelOptions]="{standalone: true}">
+                  <option value="0" selected>--Select City--</option>
+                  <option *ngFor="let city of CityNewData" value={{city.cityid}}>
+                    {{city.cityname}}
+                  </option>
+                </select>
+
+              </div>
+
+
+
+
+
+              <div class="form-group col-md-2">
+                <button class="w3-button w3-yellow w3-border" title="Add City" href="#myModal1112" data-toggle="modal" data-target="#myModal1112">+</button>
+                <!--<a class="onclickdiv" href="#myModal111" data-toggle="modal" data-target="#myModal111"><i class="anticon anticon-plus"></i></a>-->
+              </div>
+
+
+
+              <div class="form-group col-md-4">
+                <label class="font-weight-semibold" for="language">Institute/University</label>
+                <input type="text" class="form-control" id="university" [(ngModel)]="university" [ngModelOptions]="{standalone: true}" placeholder="Enter institute/university name">
+
+              </div>
+
+
+
+              <div class="form-group col-md-4">
+                <label class="font-weight-semibold" for="language">Choose File</label>
+                <input #inputfile type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage" name="img" placeholder="Upload Pdf" (change)="incomingfile($event)" accept=".xlsx">
+               
+
+
+
+              </div>
+            
+
+
+            </div>
+              <!--<div class="row">
+    <div class="form-group col-md-6 display-none">
+      <label class="font-weight-semibold" for="language">Location</label>
+      <input type="text" class="form-control" id="loc" [(ngModel)]="location" [ngModelOptions]="{standalone: true}" placeholder="Enter location">
+
+    </div>
+
+  </div>-->
+</form>
+        </div>
+
+
+
+
+        <div class="card-body">
+          <form>
+
+
+            <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+            <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+            <input type="button" class="btn btn-warning m-r-5" value="Upload" style="cursor:pointer" (click)="Uploadexcel();">
+            <a href="{{dw}}" download>Download Sample Sheet</a>
+           
+          
+          </form><br>
+
+          <!--Dynamic table bind-->
+          <div class="m-t-25">
+            <table id="data-table" class="table">
+              <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <th>Country</th>
+                  <th>State</th>
+                  <th>City</th>
+                  <th>University</th>
+
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                  <td>{{i+1}}</td>
+                  <td>{{data.country}}</td>
+                  <td>{{data.location}}</td>
+                  <td>{{data.cityname}}</td>
+                  <td>{{data.univercityname}}</td>
+
+                  <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                  <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['universityid']);"></a></span></td>
+                  <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['universityid']);"></a></span></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <div id="myModal111" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Location</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          </div>
+          <div class="modal-body">
+            <div class="form-group col-md-12">
+              <label class="font-weight-semibold" for="language">Location</label>
+              <input type="text" class="form-control" id="loc" [(ngModel)]="location" [ngModelOptions]="{standalone: true}" placeholder="Enter location">
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!--<button type="button" class="btn btn-warning m-r-5" data-dismiss="modal">Save</button>-->
+            <input type="button" class="btn btn-warning m-r-5" value="{{LocButtonText}}" style="cursor:pointer" (click)="onSubmitLoc();" data-dismiss="modal">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+    <div id="myModal1112" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add City</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          </div>
+          <div class="modal-body">
+            <div class="form-group col-md-12">
+              <label class="font-weight-semibold" for="language">City</label>
+              <input type="text" class="form-control" id="loc" [(ngModel)]="city" [ngModelOptions]="{standalone: true}" placeholder="Enter city">
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!--<button type="button" class="btn btn-warning m-r-5" data-dismiss="modal">Save</button>-->
+            <input type="button" class="btn btn-warning m-r-5" value="{{CityButtonText}}" style="cursor:pointer" (click)="onSubmitCity();" data-dismiss="modal">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+

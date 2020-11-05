@@ -1,0 +1,105 @@
+<div class="page-container">
+  <div class="main-content">
+    <div class="page-header no-gutters has-tab">
+      <h2 class="font-weight-normal">LifeCoach Agenda Counselling</h2>
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-body">
+
+        <form>
+
+
+          <div class="form-row main-custom">
+            <!--<div class="form-group col-md-4">
+    <label class="font-weight-semibold" for="fees">College Name</label>
+    <input type="text" class="form-control" id="fee" [(ngModel)]="collegename" [ngModelOptions]="{standalone: true}" placeholder="Enter College Name">
+  </div>-->
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold" for="intar">Select Coach Type</label>
+              <select id="Class" class="form-control" [(ngModel)]="selectedtopic" name="cls" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--Select Coach Type--</option>
+                <option *ngFor="let topic of TopicData" value={{topic.ID}}>
+                  {{topic.topic}}
+                </option>
+              </select>
+            </div>
+
+
+
+
+            <div class="form-group col-md-4">
+
+              <label class="font-weight-semibold" for="locat">Agenda</label>
+              <input type="text" class="form-control" id="loc" [(ngModel)]="agenda" [ngModelOptions]="{standalone: true}" placeholder="Enter Agenda Name">
+
+            </div>
+
+
+
+
+
+
+
+
+
+          </div>
+
+        </form>
+      </div>
+
+
+
+
+      <div class="card-body">
+        <form>
+
+
+          <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+          <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+        </form><br>
+
+        <!--Dynamic table bind-->
+        <div class="m-t-25">
+          <div class="table-responsive">
+            <table id="data-table" class="table">
+              <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <th>Coach Type</th>
+                  <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                  <th>Agenda</th>
+
+
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                  <td>{{i+1}}</td>
+                  <td>{{data.coachtype}}</td>
+                  <td>{{data.agenda}}</td>
+
+
+
+
+                  <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                  <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['coachid']);"></a></span></td>
+                  <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['coachid']);"></a></span></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+

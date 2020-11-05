@@ -1,0 +1,130 @@
+<div class="app">
+  <div class="layout">
+
+    <!-- Page Container START -->
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Entrance Exam</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+              <div class="row">
+                <div class="form-group col-md-3">
+
+                  <label class="font-weight-semibold" for="phoneNumber">Start Date </label>
+                  <input class="form-control" placeholder="dd-mm-yyyy"
+                         name="d2" #c2="ngModel" [(ngModel)]="SelectedDate" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="font-weight-semibold" for="language">Exam Name</label>
+                  <input type="text" class="form-control" id="Topic" [(ngModel)]="exam" [ngModelOptions]="{standalone: true}" placeholder="Enter Exam Name">
+
+                </div>
+
+              </div>
+
+              <form>
+                <div class="form-row main-custom">
+
+                  <div class="form-group col-md-4">
+                    <div class="bg-color">
+
+
+                      <label class="font-weight-semibold">Select Stream</label>
+
+
+                      <ul class="list_brdr">
+                        <span class="checkAll">
+                          <li>
+                            <input type="checkbox"
+                                   name="StreamSelected"
+                                   id="select-all3"
+                                   [(ngModel)]="AllStream"
+                                   (change)="SelectAllStream();"
+                                   [ngModelOptions]="{standalone: true}">&nbsp;Select All Streams
+                          </li>
+                        </span>
+                        <span class="all_lists">
+                          <li *ngFor="let stream of StreamData">
+                            <input type="checkbox"
+                                   class="city_check"
+                                   name="StreamSelected"
+                                   value="{{ stream.streamid }}"
+                                   [(ngModel)]="stream.selected"
+                                   (change)="getSelectedStream()"
+                                   [ngModelOptions]="{standalone: true}">{{ stream.streamname }}
+                          </li>
+                        </span>
+                      </ul>
+
+                    </div>
+                  </div>
+
+                  
+
+                </div>
+                <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+                <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="Reset();">
+                
+
+              </form>
+              
+              <div class="table-responsive m-t-25">
+                <table id="data-table" class="table">
+                  <thead>
+                    <tr>
+                      <th>SNo.</th>
+                      <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+
+                      <th>Start Date</th>
+                      <th>Stream</th>
+                      <th>Exam Name</th>
+                              
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                      <td>{{i+1}}</td>
+                     
+                      <td>{{data.startdate}}</td>
+                      <td>{{data.Stream}}</td>
+                      <td>{{data.examname}}</td>
+                      
+                      <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['examid']);"></a></span></td>
+                      <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['examid']);"></a></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Content Wrapper END -->
+      
+    </div>
+    <!-- Page Container END -->
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+  });
+</script>

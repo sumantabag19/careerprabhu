@@ -1,0 +1,158 @@
+<div class="page-container">
+  <div class="main-content">
+    <div class="page-header no-gutters has-tab">
+      <h2 class="font-weight-normal">College Repository</h2>
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-body">
+
+        <form>
+
+
+          <div class="form-row main-custom">
+            <!--<div class="form-group col-md-4">
+    <label class="font-weight-semibold" for="fees">College Name</label>
+    <input type="text" class="form-control" id="fee" [(ngModel)]="collegename" [ngModelOptions]="{standalone: true}" placeholder="Enter College Name">
+  </div>-->
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold" for="intar">College Name</label>
+              <select id="Class" class="form-control" [(ngModel)]="Selecteduniversity" name="cls" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--Select College--</option>
+                <option *ngFor="let university of UniversityData" value={{university.universityid}}>
+                  {{university.universityname}}
+                </option>
+              </select>
+            </div>
+
+
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold" for="intar">Career</label>
+              <select id="Class" class="form-control" [(ngModel)]="Selectedcareer" name="cls" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--Select Career--</option>
+                <option *ngFor="let career of CareerData" value={{career.careerid}}>
+                  {{career.careername}}
+                </option>
+              </select>
+            </div>
+
+
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold" for="intar">Select Language</label>
+              <select id="Class" class="form-control" [(ngModel)]="selectedlanguage" name="cls" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--Select Language--</option>
+                <option *ngFor="let language of languagedata" value={{language.languageid}}>
+                  {{language.languagetype}}
+                </option>
+              </select>
+            </div>
+
+
+
+
+
+            <div class="form-group col-md-12">
+              <label class="font-weight-semibold" for="description">Description</label>
+              <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="description" height="400px" name="first"></angular-editor>
+              <!--<input type="text" class="form-control" id="Testimonial" [(ngModel)]="testimonial" [ngModelOptions]="{standalone: true}" placeholder="Enter testimonial">-->
+
+            </div>
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold" for="language">Upload Image</label>
+
+
+              <input #inputFile type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage" name="img" placeholder="Upload Image" (change)="GetImageDetail($event)">
+
+            </div>
+
+            <div class="form-group col-md-4">
+
+              <label class="font-weight-semibold" for="locat">Video Link</label>
+              <input type="text" class="form-control" id="loc" [(ngModel)]="SelectedVideo" [ngModelOptions]="{standalone: true}" placeholder="Enter Video Link">
+
+
+
+
+
+            </div>
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold" for="language">Choose File</label>
+              <input #inputfile type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage1" name="img" placeholder="Upload Pdf" (change)="incomingfile($event)" accept=".xlsx">
+
+
+
+
+            </div>
+
+
+          </div>
+
+        </form>
+      </div>
+
+
+
+
+      <div class="card-body">
+        <form>
+
+
+          <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+          <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+          <input type="button" class="btn btn-warning m-r-5" value="Upload" style="cursor:pointer" (click)="Uploadexcel();">
+          <a href="{{dw}}" download>Download Sample Sheet</a>
+        </form><br>
+
+        <!--Dynamic table bind-->
+        <div class="m-t-25">
+          <div class="table-responsive">
+            <table id="data-table" class="table">
+              <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <th>college</th>
+                  <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                  <th>Career</th>
+                  <th>Language</th>
+                  <th>Description</th>
+                  <th>Image</th>
+                  <th>VideoLink</th>
+
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                  <td>{{i+1}}</td>
+                  <td>{{data.university}}</td>
+                  <td>{{data.career}}</td>
+                  <td>{{data.language}}</td>
+
+                  <td>{{data.description}}</td>
+                  <td>
+                    <a *ngIf="checklink == true">N/A</a>
+                    <a *ngIf="checklink == false" href="{{data.Image}}" download>Download</a>
+                  </td>
+                  <td>{{data.videourl}}</td>
+
+
+                  <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                  <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['repositoryid']);"></a></span></td>
+                  <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['repositoryid']);"></a></span></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+

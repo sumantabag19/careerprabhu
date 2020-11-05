@@ -1,0 +1,174 @@
+<div class="app">
+  <div class="layout">
+
+    <!-- Page Container START -->
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Principal Registration</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+
+              <form>
+                <div class="form-row main-custom">
+
+
+
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">Principal Name</label>
+                    <input type="text" class="form-control" id="coachname" [(ngModel)]="principalname" [ngModelOptions]="{standalone: true}" placeholder="Enter Principal Name">
+                  </div>
+                  <div class="form-group col-md-4" *ngIf="showmobile==1">
+                    <label class="font-weight-semibold" for="dob">Mobile No</label>
+                    <input type="text" class="form-control" id="mobile" [(ngModel)]="mobileno" [ngModelOptions]="{standalone: true}" placeholder="Enter Mobile No" maxlength="10">
+                  </div>
+                  <div class="form-group col-md-4" *ngIf="showmail==1">
+                    <label class="font-weight-semibold" for="dob">Email</label>
+                    <input type="text" class="form-control" id="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="Enter Email">
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select State</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedstate" name="cls" (change)="BindCIty();" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select State--</option>
+                      <option *ngFor="let state of StateData" value={{state.state_id}}>
+                        {{state.state_name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select City</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedcity" name="cls" (change)="BindSchool();" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select City--</option>
+                      <option *ngFor="let city of CityData" value={{city.cityid}}>
+                        {{city.cityname}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select School</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedschool" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select School--</option>
+                      <option *ngFor="let school of SchoolData" value={{school.schoolid}}>
+                        {{school.schoolname}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select Board</label>
+                    <select id="Class" class="form-control" [(ngModel)]="selectedboard" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select Board--</option>
+                      <option *ngFor="let board of BoardData" value={{board.boardid}}>
+                        {{board.boardname}}
+                      </option>
+                    </select>
+                  </div>
+                  <!--<div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="dob">Board</label>
+                    <input type="text" class="form-control" id="board" [(ngModel)]="board" [ngModelOptions]="{standalone: true}" placeholder="Enter Board">
+                  </div>-->
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="intar">Select School Type</label>
+                    <select id="Class" class="form-control" [(ngModel)]="schooltype" name="cls" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select School Type--</option>
+                      <option value="1">Career Prabhu</option>
+                      <option value="2">WonderSkool</option>
+                      <option value="3">Both</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="language">Upload Photo</label>
+
+                    <input #inputfile type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage" name="img" placeholder="Upload Photo" (change)="GetPhotoDetail($event)">
+                  </div>
+
+                </div>
+
+              </form>
+
+            </div>
+
+            <div class="card-body">
+              <form>
+                <input type="button" class="btn btn-warning m-r-5" value="{{Buttonsave}}" style="cursor:pointer" (click)="Save();">
+                <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="Reset();">
+
+                <div class="table-responsive m-t-25">
+                  <table id="data-table" class="table">
+                    <thead>
+                      <tr>
+                        <th>Sr.No</th>
+                        <th>Principal Name</th>
+                        <th>User Name</th>
+                        <th>Mobile No.</th>
+
+                        <th>Password</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>School</th>
+                        <th>Board</th>
+                        <th>School Type</th>
+                        <th>Profile Photo</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                        <td>{{i+1}}</td>
+                        <td>{{data.principalname}}</td>
+                        <td>{{data.email}}</td>
+
+                        <td>{{data.mobileno}}</td>
+
+                        <td>{{data.password}}</td>
+                        <td>{{data.state}}</td>
+                        <td>{{data.city}}</td>
+
+                        <td>{{data.school}}</td>
+                        <td>{{data.board}}</td>
+                        <td>{{data.schooltype}}</td>
+                        <td>
+                          <a *ngIf="data.photo == ''">N/A</a>
+                          <a *ngIf="data.photo != ''" href="{{data.photo}}" download>Download</a>
+                        </td>
+
+
+
+
+                        <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="Edit(i,data['principalid']);"></a></span></td>
+                        <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="Delete(i,data['principalid']);"></a></span></td>
+                      </tr>
+                    </tbody>
+
+                  </table>
+                </div>
+
+
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+
+
+</div>

@@ -1,0 +1,255 @@
+<div class="page-container">
+  <div class="main-content">
+    <div class="page-header no-gutters has-tab">
+      <h2 class="font-weight-normal">Paid Feature</h2>
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-body">
+
+        <form>
+
+          <div class="form-row main-custom">
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold" for="intar">Select Class</label>
+              <select id="Class" class="form-control" [(ngModel)]="Selectedclass" name="cls" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--Select Class--</option>
+                <option *ngFor="let class of ClassData" value={{class.classid}}>
+                  {{class.classname}}
+                </option>
+              </select>
+            </div>
+
+
+
+
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold" for="catagory">Select Category</label>
+              <select id="Catagory" class="form-control" [(ngModel)]="Selectedproduct" name="topic" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--Select Category--</option>
+                <option *ngFor="let product of ProductData" value={{product.productid}}>
+                  {{product.productname}}
+                </option>
+              </select>
+            </div>
+
+
+
+            <div class="form-group col-md-4">
+
+              <label class="font-weight-semibold" for="locat">Fees</label>
+              <input type="text" class="form-control" id="wno" [(ngModel)]="fees" [ngModelOptions]="{standalone: true}" placeholder="Enter Fees" maxlength="10">
+
+            </div>
+            <div class="form-group col-md-4">
+
+              <label class="font-weight-semibold" for="locat">GST</label>
+              <input type="text" class="form-control" id="dis" [(ngModel)]="gst" [ngModelOptions]="{standalone: true}" placeholder="Enter GST">
+
+            </div>
+            <div class="form-group col-md-4">
+
+              <label class="font-weight-semibold" for="locat">Convenience Fees</label>
+              <input type="text" class="form-control" id="dis" [(ngModel)]="conveniencefees" [ngModelOptions]="{standalone: true}" placeholder="Enter Convenience Fees">
+
+            </div>
+            <div class="form-group col-md-2">
+              <button class="w3-button w3-yellow w3-border" title="Add Testimonal" href="#myModal1112" data-toggle="modal" data-target="#myModal1112">Add Testimonial</button>
+              <!--<a class="onclickdiv" href="#myModal111" data-toggle="modal" data-target="#myModal111"><i class="anticon anticon-plus"></i></a>-->
+            </div>
+
+
+          </div>
+
+        </form>
+      </div>
+
+
+
+
+      <div class="card-body">
+        <form>
+
+
+          <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+          <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+        </form><br>
+
+        <!--Dynamic table bind-->
+        <div class="m-t-25">
+          <div class="table-responsive">
+            <table id="data-table" class="table">
+              <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                  <th>Class</th>
+                  <th>Category</th>
+                  <th>Fees</th>
+                  <th>GST</th>
+                  <th>Convenience Fees</th>
+
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                  <td>{{i+1}}</td>
+                  <td>{{data.classes}}</td>
+                  <td>{{data.product}}</td>
+                  <td>{{data.fees}}</td>
+                  <td>{{data.gst}}</td>
+                  <td>{{data.conveniencefees}}</td>
+
+
+                  <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                  <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['pricingid']);"></a></span></td>
+                  <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['pricingid']);"></a></span></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+        <div class="m-t-25">
+          <div class="table-responsive">
+            <table id="data-table" class="table">
+              <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Video Link</th>
+                  <th>Thumbnail Image</th>
+                  <th>Profile Image</th>
+
+                  <th>Testimonial</th>
+
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of GetSaveTestimonialData;let i = index" style="align-content:center">
+                  <td>{{i+1}}</td>
+                  <td>{{data.name}}</td>
+                  <td>{{data.description}}</td>
+                  <td>{{data.Video}}</td>
+                  <td>
+                    <a *ngIf="data.Image == ''">N/A</a>
+                    <a *ngIf="data.Image !=''" href="{{data.Image}}" download>Download</a>
+                  </td>
+                  <td>
+                    <a *ngIf="data.profileImage == ''">N/A</a>
+                    <a *ngIf="data.profileImage != ''" href="{{data.profileImage}}" download>Download</a>
+                  </td>
+                  <td>{{data.testimonial}}</td>
+
+
+                  <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                  <td><span><a class="fa fa-edit w3-button w3-yellow w3-border" style="font-size:22px;cursor:pointer;align-content:center" title="Add Testimonal" href="#myModal1112" data-toggle="modal" data-target="#myModal1112" (click)="EditedData(i,data['testimonialid']);"></a></span></td>
+                  <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeletedtestimonialData(i,data['testimonialid']);"></a></span></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+  <div id="myModal1112" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Testimonal</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body">
+          <div class="form-group col-md-12">
+
+            <label class="font-weight-semibold" for="locat"> Name</label>
+            <input type="text" class="form-control" id="par" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" placeholder="Enter Name">
+
+          </div>
+          <div class="form-group col-md-12">
+            <label class="font-weight-semibold" for="description">Description</label>
+            <textarea class="main-area" rows="4" cols="50" [(ngModel)]="description" [ngModelOptions]="{standalone: true}" placeholder="Enter Description"></textarea>
+
+
+
+            <!--<label class="font-weight-semibold" for="language">Guideline</label>
+    <input type="text" class="form-control" id="guid" [(ngModel)]="guideline" [ngModelOptions]="{standalone: true}" placeholder="Enter guideline">-->
+
+          </div>
+
+          <div class="form-group col-md-12">
+            <label class="font-weight-semibold" for="intar">Select Language</label>
+            <select id="Class" class="form-control" [(ngModel)]="selectedlanguage" name="cls" [ngModelOptions]="{standalone: true}">
+              <option value="0" selected>--Select Language--</option>
+              <option *ngFor="let language of languagedata" value={{language.languageid}}>
+                {{language.languagetype}}
+              </option>
+            </select>
+          </div>
+
+
+          <div class="form-group col-md-12">
+
+            <label class="font-weight-semibold" for="locat">Video Link</label>
+            <input type="text" class="form-control" id="loc" [(ngModel)]="SelectedVideo" [ngModelOptions]="{standalone: true}" placeholder="Enter Link">
+
+
+
+
+          </div>
+          <div class="form-group col-md-12">
+            <label class="font-weight-semibold" for="language">Thumbnail Image</label>
+
+
+            <input #inputFile type="File" class="form-control" id="Image" [(ngModel)]="SelectedImage" name="img" placeholder="Upload Image" (change)="GetthumbnailImageDetail($event)">
+
+          </div>
+          <div class="form-group col-md-12">
+            <label class="font-weight-semibold" for="language">Profile Image</label>
+
+
+            <input #inputFile type="File" class="form-control" id="Image" [(ngModel)]="SelectedProfileImage" name="img" placeholder="Upload Image" (change)="GetprofileImageDetail($event)">
+
+          </div>
+
+          <div class="form-group col-md-12">
+            <label class="font-weight-semibold" for="dob">Testimonial</label>
+            <textarea class="main-area" rows="4" cols="50" [(ngModel)]="testimonial" [ngModelOptions]="{standalone: true}" placeholder="Enter Testimonial"></textarea>
+
+
+
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-warning m-r-5" data-dismiss="modal">Save</button>-->
+          <input type="button" class="btn btn-warning m-r-5" value="{{TestimonialButtonText}}" style="cursor:pointer" (click)="onSubmitTestimonial();" data-dismiss="modal">
+          <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+

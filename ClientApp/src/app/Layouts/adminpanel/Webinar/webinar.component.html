@@ -1,0 +1,180 @@
+
+  <div class="page-container">
+    <div class="main-content">
+      <div class="page-header no-gutters has-tab">
+        <h2 class="font-weight-normal">Webinar Topic</h2>
+      </div>
+     
+
+        <div class="card">
+          
+          <div class="card-body">
+
+            <form>
+
+              <div class="form-row main-custom">
+                <!--<div class="form-group col-md-4">
+                  <div class="bg-color">
+                    <label class="font-weight-semibold">Select Class</label>
+                    <ul class="list_brdr">
+                      <span class="checkAll">
+                        <li>
+                          <input type="checkbox"
+                                 name="ClassSelected"
+                                 id="select-all3"
+                                 [(ngModel)]="AllClass"
+                                 (change)="SelectAllClass();"
+                                 [ngModelOptions]="{standalone: true}">&nbsp;Select All Classes
+                        </li>
+                      </span>
+                      <span class="all_lists">
+                        <li *ngFor="let class of ClassData">
+                          <input type="checkbox"
+                                 class="city_check"
+                                 name="ClassSelected"
+                                 value="{{ class.classid }}"
+                                 [(ngModel)]="class.selected"
+                                 (change)="getSelectedClass();"
+                                 [ngModelOptions]="{standalone: true}">{{ class.classname }}
+                        </li>
+                      </span>
+                    </ul>
+                    </div>
+                  </div>-->
+
+                  <!--<div class="form-group col-md-4">
+    <label class="font-weight-semibold">Select Class</label>
+    <select id="class" multiple class="form-control" [(ngModel)]="SelectedClass" [ngModelOptions]="{standalone: true}">
+      <option *ngFor="let class of ClassData" value="{{class.classid}}">
+        {{class.classname}}
+      </option>
+    </select>
+  </div>-->
+
+              <!--<div class="form-group col-md-4" *ngIf="showstream==1">
+                <div class="bg-color">
+                
+                  
+
+                  <label class="font-weight-semibold">Select Stream</label>
+
+                  
+                  <ul class="list_brdr">
+                    <span class="checkAll">
+                      <li>
+                        <input type="checkbox"
+                               name="StreamSelected"
+                               id="select-all3"
+                               [(ngModel)]="AllStream"
+                               (change)="SelectAllStream();"
+                               [ngModelOptions]="{standalone: true}">&nbsp;Select All Streams
+                      </li>
+                    </span>
+                    <span class="all_lists">
+                      <li *ngFor="let stream of StreamData">
+                        <input type="checkbox"
+                               class="city_check"
+                               name="StreamSelected"
+                               value="{{ stream.streamid }}"
+                               [(ngModel)]="stream.selected"
+                               (change)="getSelectedStream();"
+                               [ngModelOptions]="{standalone: true}">{{ stream.streamname }}
+                      </li>
+                    </span>
+                  </ul>
+                
+                </div>
+              </div>-->
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="language">Enter Topic</label>
+                    <input type="text" class="form-control" id="Topic" [(ngModel)]="Topic" [ngModelOptions]="{standalone: true}" placeholder="Enter Your Topic">
+
+                  </div>
+                </div>
+            </form>
+          </div>
+
+
+
+
+          <div class="card-body">
+            <form>
+              <!--<div class="form-row" *ngIf="ShowDiv">
+
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold">Select Class</label>
+              <select id="class" class="form-control" [(ngModel)]="SelectedClass" (change)="onChangeOfdropdown();" [ngModelOptions]="{standalone: true}">-->
+              <!--<option value="0" selected>--Select Class--</option>-->
+              <!--<option *ngFor="let class of ClassData" value="{{class.classid}}">
+                  {{class.classname}}
+                </option>
+              </select>
+
+            </div>
+
+            <div class="form-group col-md-4">
+              <label class="font-weight-semibold">Select Stream</label>
+              <select id="stream" multiple class="form-control" [(ngModel)]="SelectedStream" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--Select Stream--</option>
+                <option>Arts </option>
+                <option value="Commerce">Commerce </option>
+                <option value="Humanities/Arts">Humanities/Arts </option>
+                <option value="Non Medical">Non Medical </option>
+                <option value="Medical">Medical </option>
+              </select>
+
+            </div>-->
+              <!--<div class="form-group col-md-4">
+              <label class="font-weight-semibold">Select Student</label>
+              <select id="City" class="form-control" [(ngModel)]="SelectedStudent" [ngModelOptions]="{standalone: true}">
+                <option value="0" selected>--Select Student--</option>
+                <option *ngFor="let student of StudentData" value={{student.studentid}}>
+                  {{student.studentname}}
+                </option>
+              </select>
+            </div>-->
+              <!--</div>-->
+              <!--<div class="form-row">
+              <div class="form-group col-md-12">
+                <label class="font-weight-semibold" for="Topics">Enter Topic</label>
+                <textarea class="main-area" rows="4" cols="50" [(ngModel)]="Topic" [ngModelOptions]="{standalone: true}"></textarea>
+              </div>
+            </div>-->
+
+              <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+              <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+            </form><br>
+
+            <!--Dynamic table bind-->
+            <div class="m-t-25">
+              <table id="data-table" class="table">
+                <thead>
+                  <tr>
+                    <th>SNo.</th>
+                    <th>Topic</th>
+                    <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                    
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                    <td>{{i+1}}</td>
+                    <td>{{data.Topic}}</td>
+                    <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                    <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['ID']);"></a></span></td>
+                    <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['ID']);"></a></span></td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    

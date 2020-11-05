@@ -1,0 +1,134 @@
+<div class="app">
+  <div class="layout">
+
+    <div class="page-container">
+
+
+      <!-- Content Wrapper START -->
+      <div class="main-content">
+        <div class="page-header no-gutters has-tab">
+          <h2 class="font-weight-normal">Partner Bank Detail</h2>
+
+        </div>
+        <div class="container">
+
+          <div class="card">
+
+            <!-- Calnder -->
+            <!-- Ends here -->
+            <div class="card-body">
+              <div class="row">
+
+              </div>
+              <form>
+                <div class="form-row main-custom">
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Account Name</label>
+                    <input type="text" class="form-control" id="loc" [(ngModel)]="accountname" [ngModelOptions]="{standalone: true}" placeholder="Enter Account Name">
+
+                  </div>
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Account No</label>
+                    <input type="text" class="form-control" id="mob" [(ngModel)]="accountno" [ngModelOptions]="{standalone: true}" placeholder="Enter Account No" maxlength="10">
+
+                  </div>
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">IFSC Code</label>
+                    <input type="text" class="form-control" id="fat" [(ngModel)]="ifsccode" [ngModelOptions]="{standalone: true}" placeholder="Enter IFSC Code">
+
+                  </div>
+                  
+
+                 
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Bank Name</label>
+                    <input type="text" class="form-control" id="univ" [(ngModel)]="bankname" [ngModelOptions]="{standalone: true}" placeholder="Enter Bank Name">
+
+                  </div>
+                  <div class="form-group col-md-4">
+
+                    <label class="font-weight-semibold" for="locat">Branch</label>
+                    <input type="text" class="form-control" id="coll" [(ngModel)]="branch" [ngModelOptions]="{standalone: true}" placeholder="Enter Branch">
+
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="font-weight-semibold" for="language">Select A/C Type</label>
+                    <select id="Topic" class="form-control" [(ngModel)]="accounttype" name="topi" [ngModelOptions]="{standalone: true}">
+                      <option value="0" selected>--Select A/C Type--</option>
+                      <option value="1">Savings</option>
+                      <option value="2">Current</option>
+
+
+                      
+                    </select>
+                  </div>
+                  
+
+
+                </div>
+                <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+                <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+
+
+
+
+
+
+              </form>
+              <div class="table-responsive m-t-25">
+                <table id="data-table" class="table">
+                  <thead>
+                    <tr>
+                      <th>SNo.</th>
+
+                      <th>Account Name</th>
+                      <th>Partner Name</th>
+                      <th>Account No</th>
+                      <th>IFSC Code</th>
+                      <th>Bank Name</th>
+                      <th>Branch</th>
+                      <th>A/C Type</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of GetSaveData;let i = index" style="align-content:center">
+                      <td>{{i+1}}</td>
+                      <td>{{data.accountname}}</td>
+                      <td>{{data.partnername}}</td>
+
+                      <td>{{data.accountno}}</td>
+                      <td>{{data.ifsccode}}</td>
+                      <td>{{data.bankname}}</td>
+
+                      <td>{{data.branch}}</td>
+                      <td>{{data.accounttype}}</td>
+
+                      <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['partnerid']);"></a></span></td>
+                      <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['partnerid']);"></a></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+  </div>
+</div>
+

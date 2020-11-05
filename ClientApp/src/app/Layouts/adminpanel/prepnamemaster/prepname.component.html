@@ -1,0 +1,225 @@
+
+  <div class="page-container">
+    <div class="main-content">
+      <div class="page-header no-gutters has-tab">
+        <h2 class="font-weight-normal">Preparatory Title</h2>
+      </div>
+
+
+      <div class="card">
+        
+        <div class="card-body">
+
+          <form>
+
+            <div class="form-row main-custom">
+              <div class="form-group col-md-6">
+                <label class="font-weight-semibold" for="language">Preparatory Title</label>
+                <input type="text" class="form-control" id="Topic" [(ngModel)]="prepname" [ngModelOptions]="{standalone: true}" placeholder="Enter Prepratory Title">
+
+              </div>
+
+              <div class="form-group col-md-6">
+                <label class="font-weight-semibold">Select Preparatory Category</label>
+                <select id="class" class="form-control" [(ngModel)]="selectedprepcatagory" [ngModelOptions]="{standalone: true}">
+
+                  <option value="0" selected>--Select Preparatory Category--</option>
+                  <option *ngFor="let prep of PrepData" value="{{prep.prepid}}">
+                    {{prep.categoryname}}
+                  </option>
+                </select>
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <div class="form-group col-md-4">
+                <div class="bg-color">
+                  <label class="font-weight-semibold">Select Class</label>
+                  <ul class="list_brdr">
+                    <span class="checkAll">
+                      <li>
+                        <input type="checkbox"
+                               name="ClassSelected"
+                               id="select-all3"
+                               [(ngModel)]="AllClass"
+                               (change)="SelectAllClass();"
+                               [ngModelOptions]="{standalone: true}">&nbsp;Select All Class
+                      </li>
+                    </span>
+                    <span class="all_lists">
+                      <li *ngFor="let class of ClassData">
+                        <input type="checkbox"
+                               class="city_check"
+                               name="ClassSelected"
+                               value="{{ class.classid }}"
+                               [(ngModel)]="class.selected"
+                               (change)="getSelectedClass();"
+                               [ngModelOptions]="{standalone: true}">{{ class.classname }}
+                      </li>
+                    </span>
+                  </ul>
+                </div>
+              </div>
+
+
+
+              <div class="form-group col-md-4" *ngIf="showstream==1">
+                <div class="bg-color">
+
+                  <label class="font-weight-semibold">Select Stream</label>
+
+                  <ul class="list_brdr">
+                    <span class="checkAll">
+                      <li>
+                        <input type="checkbox"
+                               name="StreamSelected"
+                               id="select-all3"
+                               [(ngModel)]="AllStream"
+                               (change)="SelectAllStream();"
+                               [ngModelOptions]="{standalone: true}">&nbsp;Select All Stream
+                      </li>
+                    </span>
+                    <span class="all_lists">
+                      <li *ngFor="let stream of StreamData">
+                        <input type="checkbox"
+                               class="city_check"
+                               name="StreamSelected"
+                               value="{{ stream.streamid }}"
+                               [(ngModel)]="stream.selected"
+                               (change)="getSelectedStream();"
+                               [ngModelOptions]="{standalone: true}">{{ stream.streamname }}
+                      </li>
+                    </span>
+                  </ul>
+
+                </div>
+              </div>
+
+              <div class="form-group col-md-4">
+
+                <div class="bg-color">
+                  <label class="font-weight-semibold">Select Career</label>
+
+                  <ul class="list_brdr">
+                    <span class="checkAll">
+                      <li>
+                        <input type="checkbox"
+                               name="CareerSelected"
+                               id="select-all3"
+                               [(ngModel)]="AllCareer"
+                               (change)="SelectAllCareer();"
+                               [ngModelOptions]="{standalone: true}">&nbsp;Select All Career
+                      </li>
+                    </span>
+                    <span class="all_lists">
+                      <li *ngFor="let career of CareerData">
+                        <input type="checkbox"
+                               class="city_check"
+                               name="CareerSelected"
+                               value="{{ career.careerid }}"
+                               [(ngModel)]="career.selected"
+                               (change)="getSelectedCareer();"
+                               [ngModelOptions]="{standalone: true}">{{ career.careername }}
+                      </li>
+                    </span>
+                  </ul>
+
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label class="font-weight-semibold" for="language">Description</label>
+                <textarea class="main-area" rows="4" cols="45" [(ngModel)]="description" [ngModelOptions]="{standalone: true}"></textarea>
+
+
+              </div>
+
+
+
+            </div>
+          </form>
+        </div>
+
+
+
+
+        <div class="card-body">
+          <form>
+
+
+            <input type="button" class="btn btn-warning m-r-5" value="{{ButtonText}}" style="cursor:pointer" (click)="onSubmit();">
+            <input type="button" class="btn btn-warning m-r-5" value="Reset" style="cursor:pointer" (click)="onClear();">
+
+
+            <div class="row">
+              <div class="form-group col-md-4">
+
+              </div>
+              <div class="form-group col-md-4">
+              </div>
+
+              <div class="form-group col-md-4 search-box pull-right">
+
+                <input type="text" class="form-control" id="trt" [(ngModel)]="search" [ngModelOptions]="{standalone: true}" placeholder="Search">
+
+              </div>
+            </div>
+
+          </form><br>
+
+          <!--Dynamic table bind-->
+          <div class="m-t-25">
+            <table id="data-table" class="table">
+              <thead>
+                <tr>
+                  <th>SNo.</th>
+
+                  <th>Preparatory Title</th>
+                  <th>Category Name</th>
+                  <th>Class</th>
+                  <th>Stream</th>
+                  <th>Career</th>
+                  <th>Description</th>
+
+
+                  <!--<th id="customers" style="align-content:center" *ngFor="let header of HeaderData;let i=index;">{{header}}</th>-->
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of GetSaveData | searchfilter:search ;let i = index" style="align-content:center">
+                  <td>{{i+1}}</td>
+                  <td>{{data.prepname}}</td>
+                  <td>{{data.categoryname}}</td>
+                  <td>{{data.classname}}</td>
+                  <td>{{data.streamname}}</td>
+                  <td>{{data.careername}}</td>
+                  <td>{{data.description}}</td>
+
+
+                  <!--<td id="customers" *ngFor="let header of HeaderData" style="align-content:center">{{data[header]}}</td>-->
+                  <td><span><a class="fa fa-edit" style="font-size:22px;cursor:pointer;align-content:center" (click)="EditData(i,data['prepnameid']);"></a></span></td>
+                  <td><span><a class="fa fa-trash" style="font-size:22px;cursor:pointer;align-content:center" (click)="DeleteData(i,data['prepnameid']);"></a></span></td>
+                </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
